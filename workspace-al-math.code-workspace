@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "Apps"
+		},
+		{
+			"path": "Tests"
 		}
 	],
 	"settings": {}
