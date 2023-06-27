@@ -1,4 +1,4 @@
-codeunit 80100 Assert
+codeunit 80100 "Library - Math Assert"
 {
     var
         ListDifferentSizeErr: Label 'Sizes of lists do not match. Expected: ''%1'', Actual: ''%2''. %3', Comment = '%1 = Expected List Size, %2 = Actual List Size, %3 = Custom Exception Message', Locked = true;
