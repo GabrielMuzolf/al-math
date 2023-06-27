@@ -1,2 +1,3 @@
 # al-math
-Add readne file content
+Add readme file content
+Add permission sets

@@ -35,6 +35,15 @@ codeunit 70000 Vector
     end;
 
     /// <summary>
+    /// Gets the dimension of a vector.
+    /// </summary>
+    /// <returns>The dimension of the vector as an integer.</returns>
+    procedure GetDim(): Integer
+    begin
+
+    end;
+
+    /// <summary>
     /// Retrieves the vector.
     /// </summary>
     /// <returns>The vector as a list of integers.</returns>
@@ -42,6 +51,7 @@ codeunit 70000 Vector
     begin
 
     end;
+
     /// <summary>
     /// Converts the vector to a string representation in the format of square brackets like [x, y, z, ...].
     /// </summary>
