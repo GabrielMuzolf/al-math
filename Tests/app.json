@@ -10,7 +10,26 @@
   "help": "",
   "url": "",
   "logo": "",
-  "dependencies": [],
+  "dependencies": [
+    {
+      "id": "88005b7c-99ea-4134-a6b2-465498ba700b",
+      "name": "AL-Math",
+      "publisher": "Gabriel Muzolf",
+      "version": "1.0.0.0"
+    },
+    {
+      "id":  "dd0be2ea-f733-4d65-bb34-a28f4624fb14",
+      "publisher":  "Microsoft",
+      "name":  "Library Assert",
+      "version":  "22.0.0.0"
+  },
+  {
+      "id":  "e7320ebb-08b3-4406-b1ec-b4927d3e280b",
+      "publisher":  "Microsoft",
+      "name":  "Any",
+      "version":  "22.0.0.0"
+  }
+  ],
   "screenshots": [],
   "platform": "1.0.0.0",
   "application": "22.0.0.0",
