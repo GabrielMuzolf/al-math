@@ -47,9 +47,9 @@ codeunit 70000 Vector
     end;
 
     /// <summary>
-    /// Retrieves the vector.
+    /// Retrieves the vector as a list of coordinates.
     /// </summary>
-    /// <returns>The vector as a list of integers.</returns>
+    /// <returns>The vector as a list of coordinates.</returns>
     procedure GetVector(): List of [Integer]
     begin
         exit(VectorImpl.GetVector());

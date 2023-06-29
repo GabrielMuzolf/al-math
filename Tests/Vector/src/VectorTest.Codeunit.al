@@ -43,17 +43,50 @@ codeunit 80000 "Vector Test"
         Dim := Any.IntegerInRange(-10, 0);
 
         //[WHEN] The Initialize method is called for the dimension.
-        //[THEN] An error occures.
+        //[THEN] An error should occur.
         asserterror Vector.Initialize(Dim);
 
-        //[AND] The exppected error is equal to the predefined label.
+        //[AND] The expected error message should match the predefined label.
         LibraryAssert.ExpectedError(StrSubstNo(InvalidDimensionErr, Dim));
     end;
 
     [Test]
     procedure InitializeVectorByListOfCoordinatesTest()
+    var
+        Vector: Codeunit Vector;
+        Coordinates: List of [Integer];
+        Dim: Integer;
     begin
-        //[SCNARIO] Tests the initialization of a vector based on a list of coordinates.
+        //[SCENARIO] Testing the initialization of a vector based on a list of coordinates.
+
+        //[GIVEN] The vector dimension.
+        Dim := Any.IntegerInRange(1, 10);
+
+        //[AND] A list of random vector coordinates.
+        Coordinates := LibraryVectorTest.GetRandomList(Dim);
+
+        //[WHEN] The Initialize method is called with the list of coordinates.
+        Vector.Initialize(Coordinates);
+
+        //[THEN] The GetDim method should return the expected dimension.
+        LibraryAssert.AreEqual(Dim, Vector.GetDim(), 'The vector dimension is incorrect.');
+
+        //[AND] The GetVector method should return the expected coordinates.
+        LibraryMathAssert.AreEqual(Coordinates, Vector.GetVector(), 'The vector coordinates are incorrect.');
+    end;
+
+    [Test]
+    procedure InitializeVectorByAnEmptyListOfCoordinatesTest()
+    begin
+        //[SCENARIO] Testing the initialization of a vector based on an empty list of coordinates.
+
+        //[GIVEN] An empty list of vector coordinates.
+
+        //[WHEN] The Initialize method is called with the empty list of coordinates.
+
+        //[THEN] An error should occur.
+
+        //[AND] The expected error message should match the predefined label.
     end;
 
     [Test]
