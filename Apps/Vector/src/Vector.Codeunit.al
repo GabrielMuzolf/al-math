@@ -21,10 +21,10 @@ codeunit 70000 Vector
     /// <summary>
     /// Initializes a vector based on a list of coordinates.
     /// </summary>
-    /// <param name="CoordinatesList">The list of coordinates to initialize the vector.</param>
-    procedure Initialize(CoordinatesList: List of [Integer])
+    /// <param name="Coordinates">The list of coordinates to initialize the vector.</param>
+    procedure Initialize(Coordinates: List of [Integer])
     begin
-
+        VectorImpl.Initialize(Coordinates);
     end;
 
     /// <summary>

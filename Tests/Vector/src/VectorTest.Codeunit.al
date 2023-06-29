@@ -77,16 +77,21 @@ codeunit 80000 "Vector Test"
 
     [Test]
     procedure InitializeVectorByAnEmptyListOfCoordinatesTest()
+    var
+        Vector: Codeunit Vector;
+        Coordinates: List of [Integer];
+        InvalidDimensionErr: Label 'The vector dimension cannot be equal to ''%1''. It must be greater than zero.', Comment = '%1 = The Invalid Dimension', Locked = true;
     begin
         //[SCENARIO] Testing the initialization of a vector based on an empty list of coordinates.
 
         //[GIVEN] An empty list of vector coordinates.
 
         //[WHEN] The Initialize method is called with the empty list of coordinates.
-
         //[THEN] An error should occur.
+        asserterror Vector.Initialize(Coordinates);
 
         //[AND] The expected error message should match the predefined label.
+        LibraryAssert.ExpectedError(StrSubstNo(InvalidDimensionErr, Coordinates.Count()));
     end;
 
     [Test]

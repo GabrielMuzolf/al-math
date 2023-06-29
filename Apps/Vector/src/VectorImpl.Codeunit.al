@@ -21,6 +21,14 @@ codeunit 70001 "Vector Impl."
         SetCoordinates(ListOfZeros);
     end;
 
+    procedure Initialize(NewCoordinates: List of [Integer])
+    begin
+        Clear(Dim);
+        Clear(Coordinates);
+        SetDim(NewCoordinates.Count());
+        SetCoordinates(NewCoordinates);
+    end;
+
     procedure GetDim(): Integer
     begin
         exit(Dim);
