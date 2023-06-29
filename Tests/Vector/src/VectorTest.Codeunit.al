@@ -96,14 +96,52 @@ codeunit 80000 "Vector Test"
 
     [Test]
     procedure InitializeVectorByWellFormatedTextTest()
+    var
+        Vector: Codeunit Vector;
+        Coordinates: List of [Integer];
+        Dim: Integer;
     begin
         //[SCNARIO] Tests the initialization of a vector based on a well formated text.
+
+        //[GIVEN] The vector dimension.
+        Dim := Any.IntegerInRange(1, 10);
+
+        //[AND] A list of random vector coordinates.
+        Coordinates := LibraryVectorTest.GetRandomList(Dim);
+
+        //[WHEN] The Initialize method is called for the well formated coordinates in the round brackets ().
+        Vector.Initialize('(' + LibraryVectorTest.GetListAsComaSeparatedCoordinates(Coordinates) + ')');
+
+        //[THEN] The GetDim method should return the expected dimension.
+        LibraryAssert.AreEqual(3, Vector.GetDim(), 'The vector dimension is incorrect.');
+
+        //[AND] The GetVector method should return the expected coordinates.
+        LibraryMathAssert.AreEqual(Coordinates, Vector.GetVector(), 'The vector coordinates are incorrect.');
+
+        Clear(Vector);
+        //[WHEN] The Initialize method is called for the well formated coordinates in the square brackets [].
+        Vector.Initialize('[' + LibraryVectorTest.GetListAsComaSeparatedCoordinates(Coordinates) + ']');
+
+        //[THEN] The GetDim method should return the expected dimension.
+        LibraryAssert.AreEqual(3, Vector.GetDim(), 'The vector dimension is incorrect.');
+
+        //[AND] The GetVector method should return the expected coordinates.
+        LibraryMathAssert.AreEqual(Coordinates, Vector.GetVector(), 'The vector coordinates are incorrect.');
     end;
 
     [Test]
     procedure InitializeVectorByBadFormatedTextTest()
+    var
+        Vector: Codeunit Vector;
     begin
         //[SCNARIO] Tests the initialization of a vector based on a bad formated text.
+
+        //[WHEN] The Initialize method is called for the bad formated text.
+        //[THEN] An error should occur.
+        asserterror Vector.Initialize(Any.AlphabeticText(100));
+
+        //[AND] The expected error message should match the predefined label.
+        LibraryAssert.ExpectedError('Add label');
     end;
 
     [Test]
@@ -111,6 +149,4 @@ codeunit 80000 "Vector Test"
     begin
         //[SCNARIO] Tests the conversion vector to string.
     end;
-
-
 }

@@ -27,4 +27,19 @@ codeunit 80001 "Library - Vector Test"
         for i := 1 to Size do
             RandomList.Add(Any.IntegerInRange(10));
     end;
+
+    /// <summary>
+    /// Converts a list of integers into a comma-separated coordinate format.
+    /// </summary>
+    /// <param name="Coordinates">The list of integers representing coordinates.</param>
+    /// <returns>A formatted string containing the coordinates separated by commas.</returns>
+    procedure GetListAsComaSeparatedCoordinates(Coordinates: List of [Integer]) FormattedCoordinates: Text
+    var
+        i: Integer;
+    begin
+        for i := 1 to Coordinates.Count() - 1 do
+            FormattedCoordinates += Format(Coordinates.Get(i)) + ',';
+
+        FormattedCoordinates += Format(Coordinates.Get(Coordinates.Count()));
+    end;
 }
