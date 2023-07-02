@@ -110,7 +110,7 @@ codeunit 80000 "Vector Test"
         Coordinates := LibraryVectorTest.GetRandomList(Dim);
 
         //[WHEN] The Initialize method is called for the well formated coordinates in the square brackets [].
-        Vector.Initialize('[' + LibraryVectorTest.GetListAsComaSeparatedCoordinates(Coordinates) + ']');
+        Vector.Initialize('[' + LibraryVectorTest.GetListAsCommaSeparatedCoordinates(Coordinates) + ']');
 
         //[THEN] The GetDim method should return the expected dimension.
         LibraryAssert.AreEqual(Dim, Vector.GetDim(), 'The vector dimension is incorrect.');
@@ -141,7 +141,28 @@ codeunit 80000 "Vector Test"
 
     [Test]
     procedure VectorToStringTest()
+    var
+        Vector: Codeunit Vector;
+        Coordinates: List of [Integer];
+        Dim: Integer;
+        ExpectedVector: Text;
     begin
-        //[SCNARIO] Tests the conversion vector to string.
+        //[SCENARIO] Tests the conversion of a vector to a string.
+
+        //[GIVEN] The vector dimension.
+        Dim := Any.IntegerInRange(1, 10);
+
+        //[AND] A list of random vector coordinates.
+        Coordinates := LibraryVectorTest.GetRandomList(Dim);
+
+        //[AND] An initialized vector.
+        Vector.Initialize(Coordinates);
+
+        //[AND] An expected Vector as a string representation.
+        ExpectedVector := '[' + LibraryVectorTest.GetListAsCommaSeparatedCoordinates(Coordinates) + ']';
+
+        //[WHEN] The ToString method is called.
+        //[THEN] The method returns the Vector as a string in the format of [x, y, z, ...].
+        LibraryAssert.AreEqual(ExpectedVector, Vector.ToString(), 'The Vector string representation is incorrect.');
     end;
 }

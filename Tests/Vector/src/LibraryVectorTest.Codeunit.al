@@ -33,7 +33,7 @@ codeunit 80001 "Library - Vector Test"
     /// </summary>
     /// <param name="Coordinates">The list of integers representing coordinates.</param>
     /// <returns>A formatted string containing the coordinates separated by commas.</returns>
-    procedure GetListAsComaSeparatedCoordinates(Coordinates: List of [Integer]) FormattedCoordinates: Text
+    procedure GetListAsCommaSeparatedCoordinates(Coordinates: List of [Integer]) FormattedCoordinates: Text
     var
         i: Integer;
     begin
