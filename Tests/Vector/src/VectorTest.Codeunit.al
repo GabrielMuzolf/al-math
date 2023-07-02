@@ -109,21 +109,11 @@ codeunit 80000 "Vector Test"
         //[AND] A list of random vector coordinates.
         Coordinates := LibraryVectorTest.GetRandomList(Dim);
 
-        //[WHEN] The Initialize method is called for the well formated coordinates in the round brackets ().
-        Vector.Initialize('(' + LibraryVectorTest.GetListAsComaSeparatedCoordinates(Coordinates) + ')');
-
-        //[THEN] The GetDim method should return the expected dimension.
-        LibraryAssert.AreEqual(3, Vector.GetDim(), 'The vector dimension is incorrect.');
-
-        //[AND] The GetVector method should return the expected coordinates.
-        LibraryMathAssert.AreEqual(Coordinates, Vector.GetVector(), 'The vector coordinates are incorrect.');
-
-        Clear(Vector);
         //[WHEN] The Initialize method is called for the well formated coordinates in the square brackets [].
         Vector.Initialize('[' + LibraryVectorTest.GetListAsComaSeparatedCoordinates(Coordinates) + ']');
 
         //[THEN] The GetDim method should return the expected dimension.
-        LibraryAssert.AreEqual(3, Vector.GetDim(), 'The vector dimension is incorrect.');
+        LibraryAssert.AreEqual(Dim, Vector.GetDim(), 'The vector dimension is incorrect.');
 
         //[AND] The GetVector method should return the expected coordinates.
         LibraryMathAssert.AreEqual(Coordinates, Vector.GetVector(), 'The vector coordinates are incorrect.');
@@ -133,15 +123,20 @@ codeunit 80000 "Vector Test"
     procedure InitializeVectorByBadFormatedTextTest()
     var
         Vector: Codeunit Vector;
+        UnparsableText: Text;
+        UnparsableTextErr: Label 'The text ''%1'' cannot be parsed to the vector. The available format is [x,y,z, ...] ', Comment = '%1 = Unparsable Text', Locked = true;
     begin
         //[SCNARIO] Tests the initialization of a vector based on a bad formated text.
 
+        //[GIVEN] Unparsable text.
+        UnparsableText := Any.AlphabeticText(100);
+
         //[WHEN] The Initialize method is called for the bad formated text.
         //[THEN] An error should occur.
-        asserterror Vector.Initialize(Any.AlphabeticText(100));
+        asserterror Vector.Initialize(UnparsableText);
 
         //[AND] The expected error message should match the predefined label.
-        LibraryAssert.ExpectedError('Add label');
+        LibraryAssert.ExpectedError(StrSubstNo(UnparsableTextErr, UnparsableText));
     end;
 
     [Test]

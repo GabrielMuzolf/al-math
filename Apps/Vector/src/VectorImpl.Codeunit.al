@@ -6,6 +6,7 @@ codeunit 70001 "Vector Impl."
         Coordinates: List of [Integer];
         Dim: Integer;
         InvalidDimensionErr: Label 'The vector dimension cannot be equal to ''%1''. It must be greater than zero.', Comment = '%1 = The Invalid Dimension';
+        UnparsableTextErr: Label 'The text ''%1'' cannot be parsed to the vector. The available format is [x,y,z, ...] ', Comment = '%1 = Unparsable Text';
 
     procedure Initialize(NewDim: Integer)
     var
@@ -29,6 +30,16 @@ codeunit 70001 "Vector Impl."
         SetCoordinates(NewCoordinates);
     end;
 
+    procedure Initialize(VectorAsText: Text)
+    var
+        NewCoordinates: List of [Integer];
+    begin
+        if not ParseTextToCoordinates(VectorAsText, NewCoordinates) then
+            Error(UnparsableTextErr, VectorAsText);
+
+        Initialize(NewCoordinates);
+    end;
+
     procedure GetDim(): Integer
     begin
         exit(Dim);
@@ -50,5 +61,44 @@ codeunit 70001 "Vector Impl."
     local procedure SetCoordinates(NewCoordinates: List of [Integer])
     begin
         Coordinates := NewCoordinates;
+    end;
+
+    local procedure ParseTextToCoordinates(VectorAsText: Text; var NewCoordinates: List of [Integer]): Boolean
+    var
+        CoordinatesAsText: List of [Text];
+    begin
+        if not (VectorAsText.Substring(1, 1) in ['[']) then
+            exit;
+
+        if not (VectorAsText.Substring(StrLen(VectorAsText), 1) in [']']) then
+            exit;
+
+        RemoveFirstAndLastChar(VectorAsText);
+
+        CoordinatesAsText := VectorAsText.Split(',');
+        if ConvertListOfTextsToIntegers(CoordinatesAsText, NewCoordinates) then
+            exit(true);
+    end;
+
+    local procedure RemoveFirstAndLastChar(var Text: Text)
+    begin
+        if StrLen(Text) < 2 then
+            exit;
+
+        Text := DelStr(Text, 1, 1);
+        Text := DelStr(Text, StrLen(Text), 1);
+    end;
+
+    [TryFunction]
+    local procedure ConvertListOfTextsToIntegers(ListOfText: List of [Text]; var ListOfIntegers: List of [Integer])
+    var
+        i: Integer;
+        IntegerValue: Integer;
+    begin
+        Clear(ListOfIntegers);
+        for i := 1 to ListOfText.Count() do begin
+            Evaluate(IntegerValue, ListOfText.Get(i));
+            ListOfIntegers.Add(IntegerValue);
+        end;
     end;
 }

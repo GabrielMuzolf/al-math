@@ -28,13 +28,13 @@ codeunit 70000 Vector
     end;
 
     /// <summary>
-    /// Initializes a vector based on a well-formatted string representation.
-    /// The available formats are: [x,y,z...] and (x,y,z...).
+    /// Initializes a vector based on a well-formatted string representation of a vector.
+    /// The available format are: [x,y,z, ...].
     /// </summary>
     /// <param name="FormattedVector">The well-formatted string representation of the vector.</param>
-    procedure Initialize(FormatedVector: Text)
+    procedure Initialize(VectorAsText: Text)
     begin
-
+        VectorImpl.Initialize(VectorAsText);
     end;
 
     /// <summary>
