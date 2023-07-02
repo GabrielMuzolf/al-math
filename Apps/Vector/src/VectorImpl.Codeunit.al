@@ -23,14 +23,6 @@ codeunit 70001 "Vector Impl."
         SetCoordinates(ListOfZeros);
     end;
 
-    procedure Initialize(NewCoordinates: List of [Integer])
-    begin
-        Clear(Dim);
-        Clear(Coordinates);
-        SetDim(NewCoordinates.Count());
-        SetCoordinates(NewCoordinates);
-    end;
-
     procedure Initialize(VectorAsText: Text)
     var
         NewCoordinates: List of [Integer];
@@ -41,13 +33,23 @@ codeunit 70001 "Vector Impl."
         Initialize(NewCoordinates);
     end;
 
+    procedure Initialize(NewCoordinates: List of [Integer])
+    begin
+        Clear(Dim);
+        Clear(Coordinates);
+        SetDim(NewCoordinates.Count());
+        SetCoordinates(NewCoordinates);
+    end;
+
     procedure GetDim(): Integer
     begin
+        ErrIfVectorIsNotInitalized();
         exit(Dim);
     end;
 
     procedure GetVector(): List of [Integer]
     begin
+        ErrIfVectorIsNotInitalized();
         exit(Coordinates);
     end;
 
