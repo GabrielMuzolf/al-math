@@ -3,6 +3,7 @@ codeunit 70001 "Vector Impl."
     Access = Internal;
 
     var
+        Math: Codeunit Math;
         Coordinates: List of [Integer];
         Dim: Integer;
         InvalidDimensionErr: Label 'The vector dimension cannot be equal to ''%1''. It must be greater than zero.', Comment = '%1 = The Invalid Dimension';
@@ -65,14 +66,24 @@ codeunit 70001 "Vector Impl."
         VectorAsString += Format(Coordinates.Get(Coordinates.Count())) + ']';
     end;
 
-    procedure CalculateEuclideanNorm(): Decimal
+    procedure CalculateEuclideanNorm() EuclideanNorm: Decimal
+    var
+        i: Integer;
     begin
+        ErrIfVectorIsNotInitalized();
+        for i := 1 to Coordinates.Count do
+            EuclideanNorm += Math.Pow(Coordinates.Get(i), 2);
 
+        EuclideanNorm := Math.Sqrt(EuclideanNorm);
     end;
 
-    procedure CalculateTaxicabNorm(): Decimal
+    procedure CalculateTaxicabNorm() TaxicabNorm: Decimal
+    var
+        i: Integer;
     begin
-
+        ErrIfVectorIsNotInitalized();
+        for i := 1 to Coordinates.Count do
+            TaxicabNorm += Math.Abs(Coordinates.Get(i));
     end;
 
     local procedure SetDim(NewDim: Integer)
