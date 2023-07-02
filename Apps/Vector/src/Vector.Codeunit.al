@@ -61,6 +61,6 @@ codeunit 70000 Vector
     /// <returns>A string representation of the vector in the specified format.</returns>
     procedure ToString(): Text
     begin
-
+        exit(VectorImpl.ToString());
     end;
 }

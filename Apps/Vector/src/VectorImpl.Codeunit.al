@@ -7,6 +7,7 @@ codeunit 70001 "Vector Impl."
         Dim: Integer;
         InvalidDimensionErr: Label 'The vector dimension cannot be equal to ''%1''. It must be greater than zero.', Comment = '%1 = The Invalid Dimension';
         UnparsableTextErr: Label 'The text ''%1'' cannot be parsed to the vector. The available format is [x,y,z, ...] ', Comment = '%1 = Unparsable Text';
+        VectorNotInitalizedErr: Label 'The vector is not initialized.';
 
     procedure Initialize(NewDim: Integer)
     var
@@ -48,6 +49,18 @@ codeunit 70001 "Vector Impl."
     procedure GetVector(): List of [Integer]
     begin
         exit(Coordinates);
+    end;
+
+    procedure ToString() VectorAsString: Text
+    var
+        i: Integer;
+    begin
+        ErrIfVectorIsNotInitalized();
+        VectorAsString := '[';
+        for i := 1 to Coordinates.Count() - 1 do
+            VectorAsString += Format(Coordinates.Get(i)) + ',';
+
+        VectorAsString += Format(Coordinates.Get(Coordinates.Count())) + ']';
     end;
 
     local procedure SetDim(NewDim: Integer)
@@ -100,5 +113,13 @@ codeunit 70001 "Vector Impl."
             Evaluate(IntegerValue, ListOfText.Get(i));
             ListOfIntegers.Add(IntegerValue);
         end;
+    end;
+
+    local procedure ErrIfVectorIsNotInitalized()
+    begin
+        if Dim > 0 then
+            exit;
+
+        Error(VectorNotInitalizedErr);
     end;
 }
