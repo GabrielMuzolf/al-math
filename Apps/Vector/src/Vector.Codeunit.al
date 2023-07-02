@@ -63,4 +63,22 @@ codeunit 70000 Vector
     begin
         exit(VectorImpl.ToString());
     end;
+
+    /// <summary>
+    /// Calculates and returns the Euclidean norm for a vector.
+    /// </summary>
+    /// <returns>The Euclidean norm as a Decimal value.</returns>
+    procedure CalculateEuclideanNorm(): Decimal
+    begin
+        exit(VectorImpl.CalculateEuclideanNorm());
+    end;
+
+    /// <summary>
+    /// Calculates and returns the Taxicab norm for a vector.
+    /// </summary>
+    /// <returns>The Taxicab norm as a Decimal value.</returns>
+    procedure CalculateTaxicabNorm(): Decimal
+    begin
+        exit(VectorImpl.CalculateTaxicabNorm());
+    end;
 }

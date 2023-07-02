@@ -65,6 +65,16 @@ codeunit 70001 "Vector Impl."
         VectorAsString += Format(Coordinates.Get(Coordinates.Count())) + ']';
     end;
 
+    procedure CalculateEuclideanNorm(): Decimal
+    begin
+
+    end;
+
+    procedure CalculateTaxicabNorm(): Decimal
+    begin
+
+    end;
+
     local procedure SetDim(NewDim: Integer)
     begin
         if NewDim <= 0 then

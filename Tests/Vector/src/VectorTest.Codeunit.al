@@ -144,16 +144,12 @@ codeunit 80000 "Vector Test"
     var
         Vector: Codeunit Vector;
         Coordinates: List of [Integer];
-        Dim: Integer;
         ExpectedVector: Text;
     begin
         //[SCENARIO] Tests the conversion of a vector to a string.
 
-        //[GIVEN] The vector dimension.
-        Dim := Any.IntegerInRange(1, 10);
-
-        //[AND] A list of random vector coordinates.
-        Coordinates := LibraryVectorTest.GetRandomList(Dim);
+        //[GIVEN] A list of random vector coordinates.
+        Coordinates := LibraryVectorTest.GetRandomList(Any.IntegerInRange(1, 10));
 
         //[AND] An initialized vector.
         Vector.Initialize(Coordinates);
@@ -164,5 +160,50 @@ codeunit 80000 "Vector Test"
         //[WHEN] The ToString method is called.
         //[THEN] The method returns the Vector as a string in the format of [x, y, z, ...].
         LibraryAssert.AreEqual(ExpectedVector, Vector.ToString(), 'The Vector string representation is incorrect.');
+    end;
+
+    [Test]
+    procedure VectorEuclideanNormTest()
+    var
+        Vector: Codeunit Vector;
+        Coordinates: List of [Integer];
+    begin
+        //[SCENARIO] Tests the Euclidean Norm calculation.
+
+        //[GIVEN] Default test coordinates.
+        Coordinates := GetDefaultCoordinates();
+
+        //[AND] An initialized vector.
+        Vector.Initialize(Coordinates);
+
+        //[WHEN] The CalculateEuclideanNorm method is called.
+        //[THEN] The method returns 5, which is the Euclidean Norm for the default coordinates.
+        LibraryAssert.AreEqual(5, Vector.CalculateEuclideanNorm(), 'The Euclidean Norm is incorrect.');
+    end;
+
+    [Test]
+    procedure VectorTaxicabNormTest()
+    var
+        Vector: Codeunit Vector;
+        Coordinates: List of [Integer];
+    begin
+        //[SCENARIO] Tests the Taxicab Norm calculation.
+
+        //[GIVEN] Default test coordinates.
+        Coordinates := GetDefaultCoordinates();
+
+        //[AND] An initialized vector.
+        Vector.Initialize(Coordinates);
+
+        //[WHEN] The CalculateTaxicabNorm method is called.
+        //[THEN] The method returns 7, which is the Taxicab Norm for the default coordinates.
+        LibraryAssert.AreEqual(7, Vector.CalculateTaxicabNorm(), 'The Taxicab Norm is incorrect.');
+    end;
+
+    local procedure GetDefaultCoordinates() Coordinates: List of [Integer]
+    begin
+        Coordinates.Add(4);
+        Coordinates.Add(-3);
+        Coordinates.Add(0);
     end;
 }
