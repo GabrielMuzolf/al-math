@@ -44,13 +44,13 @@ codeunit 70001 "Vector Impl."
 
     procedure GetDim(): Integer
     begin
-        ErrIfVectorIsNotInitalized();
+        ErrIfVectorIsNotInitialized();
         exit(Dim);
     end;
 
     procedure GetVector(): List of [Decimal]
     begin
-        ErrIfVectorIsNotInitalized();
+        ErrIfVectorIsNotInitialized();
         exit(Coordinates);
     end;
 
@@ -58,7 +58,7 @@ codeunit 70001 "Vector Impl."
     var
         i: Integer;
     begin
-        ErrIfVectorIsNotInitalized();
+        ErrIfVectorIsNotInitialized();
         VectorAsString := '[';
         for i := 1 to Coordinates.Count() - 1 do
             VectorAsString += Format(Coordinates.Get(i)) + ',';
@@ -70,7 +70,7 @@ codeunit 70001 "Vector Impl."
     var
         i: Integer;
     begin
-        ErrIfVectorIsNotInitalized();
+        ErrIfVectorIsNotInitialized();
         for i := 1 to Coordinates.Count do
             EuclideanNorm += Math.Pow(Coordinates.Get(i), 2);
 
@@ -81,7 +81,7 @@ codeunit 70001 "Vector Impl."
     var
         i: Integer;
     begin
-        ErrIfVectorIsNotInitalized();
+        ErrIfVectorIsNotInitialized();
         for i := 1 to Coordinates.Count do
             TaxicabNorm += Math.Abs(Coordinates.Get(i));
     end;
@@ -90,7 +90,7 @@ codeunit 70001 "Vector Impl."
     var
         i: Integer;
     begin
-        ErrIfVectorIsNotInitalized();
+        ErrIfVectorIsNotInitialized();
         for i := 1 to Coordinates.Count() do
             Coordinates.Set(i, Coordinates.Get(i) * Scalar);
     end;
@@ -113,6 +113,14 @@ codeunit 70001 "Vector Impl."
     procedure DotProduct(OtherVector: Codeunit Vector);
     begin
 
+    end;
+
+    procedure ErrIfVectorIsNotInitialized()
+    begin
+        if Dim > 0 then
+            exit;
+
+        Error(VectorNotInitalizedErr);
     end;
 
     local procedure SetDim(NewDim: Integer)
@@ -165,13 +173,5 @@ codeunit 70001 "Vector Impl."
             Evaluate(DecimalValue, ListOfText.Get(i));
             ListOfDecimals.Add(DecimalValue);
         end;
-    end;
-
-    local procedure ErrIfVectorIsNotInitalized()
-    begin
-        if Dim > 0 then
-            exit;
-
-        Error(VectorNotInitalizedErr);
     end;
 }

@@ -126,4 +126,12 @@ codeunit 70000 Vector
     begin
 
     end;
+
+    /// <summary>
+    /// Raises an error if the vector is not initialized.
+    /// </summary>
+    procedure ErrIfVectorIsNotInitialized()
+    begin
+        VectorImpl.ErrIfVectorIsNotInitialized();
+    end;
 }
