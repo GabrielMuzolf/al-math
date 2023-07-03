@@ -140,6 +140,39 @@ codeunit 80000 "Vector Test"
     end;
 
     [Test]
+    procedure VectorNotIntializedTest()
+    var
+        Vector: Codeunit Vector;
+        VectorNotInitalizedErr: Label 'The vector is not initialized.', Locked = true;
+    begin
+        //[SCENARIO] Tests raising an error if the vector is not initialized for a non-initialized vector.
+
+        //[GIVEN] A non-initialized vector.
+
+        //[WHEN] The ErrIfVectorIsNotInitialized method is called.
+        //[THEN] An error should occur.
+        asserterror Vector.ErrIfVectorIsNotInitialized();
+
+        //[AND] The expected error message should match the predefined label.
+        LibraryAssert.ExpectedError(VectorNotInitalizedErr);
+    end;
+
+    [Test]
+    procedure VectorIntializedTest()
+    var
+        Vector: Codeunit Vector;
+    begin
+        //[SCENARIO] Tests raising an error if the vector is not initialized for an initialized vector.
+
+        //[GIVEN] An initialized vector.
+        Vector.Initialize(Any.IntegerInRange(1, 10));
+
+        //[WHEN] The ErrIfVectorIsNotInitialized method is called.
+        //[THEN] No error should occur.
+        Vector.ErrIfVectorIsNotInitialized();
+    end;
+
+    [Test]
     procedure VectorToStringTest()
     var
         Vector: Codeunit Vector;
