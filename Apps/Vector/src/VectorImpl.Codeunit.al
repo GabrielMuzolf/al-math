@@ -7,7 +7,7 @@ codeunit 70001 "Vector Impl."
         Coordinates: List of [Decimal];
         Dim: Integer;
         InvalidDimensionErr: Label 'The vector dimension cannot be equal to ''%1''. It must be greater than zero.', Comment = '%1 = The Invalid Dimension';
-        UnparsableTextErr: Label 'The text ''%1'' cannot be parsed to the vector. The available format is [x,y,z, ...] ', Comment = '%1 = Unparsable Text';
+        UnparsableTextErr: Label 'The text ''%1'' cannot be parsed to the vector. The available format is [x,y,z, ...]. The decimal separator must be a dot.', Comment = '%1 = Unparsable Text';
         VectorNotInitalizedErr: Label 'The vector is not initialized.';
 
     procedure Initialize(NewDim: Integer)

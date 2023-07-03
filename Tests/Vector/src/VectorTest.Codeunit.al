@@ -124,7 +124,7 @@ codeunit 80000 "Vector Test"
     var
         Vector: Codeunit Vector;
         UnparsableText: Text;
-        UnparsableTextErr: Label 'The text ''%1'' cannot be parsed to the vector. The available format is [x,y,z, ...] ', Comment = '%1 = Unparsable Text', Locked = true;
+        UnparsableTextErr: Label 'The text ''%1'' cannot be parsed to the vector. The available format is [x,y,z, ...]. The decimal separator must be a dot.', Comment = '%1 = Unparsable Text', Locked = true;
     begin
         //[SCNARIO] Tests the initialization of a vector based on a bad formated text.
 

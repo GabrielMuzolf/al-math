@@ -29,7 +29,7 @@ codeunit 70000 Vector
 
     /// <summary>
     /// Initializes a vector based on a well-formatted string representation of a vector.
-    /// The available format are: [x,y,z, ...].
+    /// The available format are: [x,y,z, ...]. The decimal separator must be a dot.
     /// </summary>
     /// <param name="FormattedVector">The well-formatted string representation of the vector.</param>
     procedure Initialize(VectorAsText: Text)
