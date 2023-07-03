@@ -54,7 +54,7 @@ codeunit 80000 "Vector Test"
     procedure InitializeVectorByListOfCoordinatesTest()
     var
         Vector: Codeunit Vector;
-        Coordinates: List of [Integer];
+        Coordinates: List of [Decimal];
         Dim: Integer;
     begin
         //[SCENARIO] Testing the initialization of a vector based on a list of coordinates.
@@ -79,7 +79,7 @@ codeunit 80000 "Vector Test"
     procedure InitializeVectorByAnEmptyListOfCoordinatesTest()
     var
         Vector: Codeunit Vector;
-        Coordinates: List of [Integer];
+        Coordinates: List of [Decimal];
         InvalidDimensionErr: Label 'The vector dimension cannot be equal to ''%1''. It must be greater than zero.', Comment = '%1 = The Invalid Dimension', Locked = true;
     begin
         //[SCENARIO] Testing the initialization of a vector based on an empty list of coordinates.
@@ -98,7 +98,7 @@ codeunit 80000 "Vector Test"
     procedure InitializeVectorByWellFormatedTextTest()
     var
         Vector: Codeunit Vector;
-        Coordinates: List of [Integer];
+        Coordinates: List of [Decimal];
         Dim: Integer;
     begin
         //[SCNARIO] Tests the initialization of a vector based on a well formated text.
@@ -143,7 +143,7 @@ codeunit 80000 "Vector Test"
     procedure VectorToStringTest()
     var
         Vector: Codeunit Vector;
-        Coordinates: List of [Integer];
+        Coordinates: List of [Decimal];
         ExpectedVector: Text;
     begin
         //[SCENARIO] Tests the conversion of a vector to a string.
@@ -166,7 +166,7 @@ codeunit 80000 "Vector Test"
     procedure VectorEuclideanNormTest()
     var
         Vector: Codeunit Vector;
-        Coordinates: List of [Integer];
+        Coordinates: List of [Decimal];
     begin
         //[SCENARIO] Tests the Euclidean Norm calculation.
 
@@ -185,7 +185,7 @@ codeunit 80000 "Vector Test"
     procedure VectorTaxicabNormTest()
     var
         Vector: Codeunit Vector;
-        Coordinates: List of [Integer];
+        Coordinates: List of [Decimal];
     begin
         //[SCENARIO] Tests the Taxicab Norm calculation.
 
@@ -204,7 +204,7 @@ codeunit 80000 "Vector Test"
     procedure MultipleVectorByScalarTest()
     var
         Vector: Codeunit Vector;
-        Coordinates: List of [Integer];
+        Coordinates: List of [Decimal];
         Scalar: Decimal;
     begin
         //[SCENARIO] Tests the multiplication of vector by scalar.
@@ -216,7 +216,7 @@ codeunit 80000 "Vector Test"
         Vector.Initialize(Coordinates);
 
         //[AND] A random scalar value.
-        Scalar := Any.DecimalInRange(100, 2);
+        Scalar := Any.IntegerInRange(100);
 
         //[WHEN] The ScalarMultiplication method is called.
         Vector.ScalarMultiplication(Scalar);
@@ -226,7 +226,7 @@ codeunit 80000 "Vector Test"
         LibraryMathAssert.AreEqual(Coordinates, Vector.GetVector(), 'The vector coordinates multiplied by scalar are incorrect.');
     end;
 
-    local procedure GetDefaultCoordinates() Coordinates: List of [Integer]
+    local procedure GetDefaultCoordinates() Coordinates: List of [Decimal]
     begin
         Coordinates.Add(4);
         Coordinates.Add(-3);

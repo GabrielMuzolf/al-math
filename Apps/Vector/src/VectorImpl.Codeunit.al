@@ -4,7 +4,7 @@ codeunit 70001 "Vector Impl."
 
     var
         Math: Codeunit Math;
-        Coordinates: List of [Integer];
+        Coordinates: List of [Decimal];
         Dim: Integer;
         InvalidDimensionErr: Label 'The vector dimension cannot be equal to ''%1''. It must be greater than zero.', Comment = '%1 = The Invalid Dimension';
         UnparsableTextErr: Label 'The text ''%1'' cannot be parsed to the vector. The available format is [x,y,z, ...] ', Comment = '%1 = Unparsable Text';
@@ -12,7 +12,7 @@ codeunit 70001 "Vector Impl."
 
     procedure Initialize(NewDim: Integer)
     var
-        ListOfZeros: List of [Integer];
+        ListOfZeros: List of [Decimal];
         i: Integer;
     begin
         Clear(Dim);
@@ -26,7 +26,7 @@ codeunit 70001 "Vector Impl."
 
     procedure Initialize(VectorAsText: Text)
     var
-        NewCoordinates: List of [Integer];
+        NewCoordinates: List of [Decimal];
     begin
         if not ParseTextToCoordinates(VectorAsText, NewCoordinates) then
             Error(UnparsableTextErr, VectorAsText);
@@ -34,7 +34,7 @@ codeunit 70001 "Vector Impl."
         Initialize(NewCoordinates);
     end;
 
-    procedure Initialize(NewCoordinates: List of [Integer])
+    procedure Initialize(NewCoordinates: List of [Decimal])
     begin
         Clear(Dim);
         Clear(Coordinates);
@@ -48,7 +48,7 @@ codeunit 70001 "Vector Impl."
         exit(Dim);
     end;
 
-    procedure GetVector(): List of [Integer]
+    procedure GetVector(): List of [Decimal]
     begin
         ErrIfVectorIsNotInitalized();
         exit(Coordinates);
@@ -87,8 +87,12 @@ codeunit 70001 "Vector Impl."
     end;
 
     procedure ScalarMultiplication(Scalar: Decimal)
+    var
+        i: Integer;
     begin
-
+        ErrIfVectorIsNotInitalized();
+        for i := 1 to Coordinates.Count() do
+            Coordinates.Set(i, Coordinates.Get(i) * Scalar);
     end;
 
     local procedure SetDim(NewDim: Integer)
@@ -99,12 +103,12 @@ codeunit 70001 "Vector Impl."
         Dim := NewDim;
     end;
 
-    local procedure SetCoordinates(NewCoordinates: List of [Integer])
+    local procedure SetCoordinates(NewCoordinates: List of [Decimal])
     begin
         Coordinates := NewCoordinates;
     end;
 
-    local procedure ParseTextToCoordinates(VectorAsText: Text; var NewCoordinates: List of [Integer]): Boolean
+    local procedure ParseTextToCoordinates(VectorAsText: Text; var NewCoordinates: List of [Decimal]): Boolean
     var
         CoordinatesAsText: List of [Text];
     begin
@@ -117,7 +121,7 @@ codeunit 70001 "Vector Impl."
         RemoveFirstAndLastChar(VectorAsText);
 
         CoordinatesAsText := VectorAsText.Split(',');
-        if ConvertListOfTextsToIntegers(CoordinatesAsText, NewCoordinates) then
+        if ConvertListOfTextsToDecimals(CoordinatesAsText, NewCoordinates) then
             exit(true);
     end;
 
@@ -131,15 +135,15 @@ codeunit 70001 "Vector Impl."
     end;
 
     [TryFunction]
-    local procedure ConvertListOfTextsToIntegers(ListOfText: List of [Text]; var ListOfIntegers: List of [Integer])
+    local procedure ConvertListOfTextsToDecimals(ListOfText: List of [Text]; var ListOfDecimals: List of [Decimal])
     var
         i: Integer;
-        IntegerValue: Integer;
+        DecimalValue: Decimal;
     begin
-        Clear(ListOfIntegers);
+        Clear(ListOfDecimals);
         for i := 1 to ListOfText.Count() do begin
-            Evaluate(IntegerValue, ListOfText.Get(i));
-            ListOfIntegers.Add(IntegerValue);
+            Evaluate(DecimalValue, ListOfText.Get(i));
+            ListOfDecimals.Add(DecimalValue);
         end;
     end;
 

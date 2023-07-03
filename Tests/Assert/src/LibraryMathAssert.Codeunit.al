@@ -7,12 +7,12 @@ codeunit 80100 "Library - Math Assert"
     /// <summary>
     /// Test if the two lists are equal and throws an exception if they are not.
     /// </summary>
-    /// <param name="Expected">The expected list of integers.</param>
-    /// <param name="Actual">The actual list of integers.</param>
+    /// <param name="Expected">The expected list of decimals.</param>
+    /// <param name="Actual">The actual list of decimals.</param>
     /// <param name="Msg">The message to include in the exception when actual is not equal to expected. The message is shown in test results.</param>
-    procedure AreEqual(Expected: List of [Integer]; Actual: List of [Integer]; Msg: Text)
+    procedure AreEqual(Expected: List of [Decimal]; Actual: List of [Decimal]; Msg: Text)
     var
-        ExpectedValue: Integer;
+        ExpectedValue: Decimal;
     begin
         if Expected.Count() <> Actual.Count() then
             Error(ListDifferentSizeErr, Expected.Count(), Actual.Count, Msg);

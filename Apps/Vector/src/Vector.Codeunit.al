@@ -22,7 +22,7 @@ codeunit 70000 Vector
     /// Initializes a vector based on a list of coordinates.
     /// </summary>
     /// <param name="Coordinates">The list of coordinates to initialize the vector.</param>
-    procedure Initialize(Coordinates: List of [Integer])
+    procedure Initialize(Coordinates: List of [Decimal])
     begin
         VectorImpl.Initialize(Coordinates);
     end;
@@ -50,7 +50,7 @@ codeunit 70000 Vector
     /// Retrieves the vector as a list of coordinates.
     /// </summary>
     /// <returns>The vector as a list of coordinates.</returns>
-    procedure GetVector(): List of [Integer]
+    procedure GetVector(): List of [Decimal]
     begin
         exit(VectorImpl.GetVector());
     end;
