@@ -86,6 +86,11 @@ codeunit 70001 "Vector Impl."
             TaxicabNorm += Math.Abs(Coordinates.Get(i));
     end;
 
+    procedure ScalarMultiplication(Scalar: Decimal)
+    begin
+
+    end;
+
     local procedure SetDim(NewDim: Integer)
     begin
         if NewDim <= 0 then

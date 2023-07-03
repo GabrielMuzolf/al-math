@@ -42,4 +42,17 @@ codeunit 80001 "Library - Vector Test"
 
         FormattedCoordinates += Format(Coordinates.Get(Coordinates.Count()));
     end;
+
+    /// <summary>
+    /// Multiplies each element of the <paramref name="IntegersList"/> by a specified <paramref name="Number"/>.
+    /// </summary>
+    /// <param name="IntegersList">The list of integers to be multiplied.</param>
+    /// <param name="Number">The number to multiply each element of the list by.</param>
+    procedure MultipleListByNumber(var IntegersList: List of [Integer]; Number: Decimal)
+    var
+        i: Integer;
+    begin
+        for i := 1 to IntegersList.Count() do
+            IntegersList.Set(i, IntegersList.Get(i) * Number);
+    end;
 }

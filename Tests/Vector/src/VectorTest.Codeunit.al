@@ -200,6 +200,32 @@ codeunit 80000 "Vector Test"
         LibraryAssert.AreEqual(7, Vector.CalculateTaxicabNorm(), 'The Taxicab Norm is incorrect.');
     end;
 
+    [Test]
+    procedure MultipleVectorByScalarTest()
+    var
+        Vector: Codeunit Vector;
+        Coordinates: List of [Integer];
+        Scalar: Decimal;
+    begin
+        //[SCENARIO] Tests the multiplication of vector by scalar.
+
+        //[GIVEN] Default test coordinates.
+        Coordinates := GetDefaultCoordinates();
+
+        //[AND] An initialized vector.
+        Vector.Initialize(Coordinates);
+
+        //[AND] A random scalar value.
+        Scalar := Any.DecimalInRange(100, 2);
+
+        //[WHEN] The ScalarMultiplication method is called.
+        Vector.ScalarMultiplication(Scalar);
+
+        //[THEN] The GetVector method should return the coordinates multiplied by the scalar.
+        LibraryVectorTest.MultipleListByNumber(Coordinates, Scalar);
+        LibraryMathAssert.AreEqual(Coordinates, Vector.GetVector(), 'The vector coordinates multiplied by scalar are incorrect.');
+    end;
+
     local procedure GetDefaultCoordinates() Coordinates: List of [Integer]
     begin
         Coordinates.Add(4);

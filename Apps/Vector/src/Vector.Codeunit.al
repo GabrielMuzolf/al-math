@@ -81,4 +81,13 @@ codeunit 70000 Vector
     begin
         exit(VectorImpl.CalculateTaxicabNorm());
     end;
+
+    /// <summary>
+    /// Multiplies the vector by a scalar.
+    /// </summary>
+    /// <param name="Scalar">The scalar value to multiply the vector by.</param>
+    procedure ScalarMultiplication(Scalar: Decimal)
+    begin
+        VectorImpl.ScalarMultiplication(Scalar);
+    end;
 }
