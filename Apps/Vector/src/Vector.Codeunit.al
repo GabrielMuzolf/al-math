@@ -90,4 +90,40 @@ codeunit 70000 Vector
     begin
         VectorImpl.ScalarMultiplication(Scalar);
     end;
+
+    /// <summary>
+    /// Determines if the vector is equal to the <paramref name="OtherVector"/>.
+    /// </summary>
+    /// <param name="OtherVector">The vector to compare with.</param>
+    procedure AreEqual(OtherVector: Codeunit Vector);
+    begin
+
+    end;
+
+    /// <summary>
+    /// Adds the <paramref name="OtherVector"/> to the vector.
+    /// </summary>
+    /// <param name="OtherVector">The vector to add.</param>
+    procedure AddVector(OtherVector: Codeunit Vector);
+    begin
+
+    end;
+
+    /// <summary>
+    /// Subtracts the <paramref name="OtherVector"/> from the current vector.
+    /// </summary>
+    /// <param name="OtherVector">The vector to subtract.</param>
+    procedure SubtractVector(OtherVector: Codeunit Vector);
+    begin
+
+    end;
+
+    /// <summary>
+    /// Calculates the dot product of vector with the <paramref name="OtherVector"/>.
+    /// </summary>
+    /// <param name="OtherVector">The vector to calculate the dot product with.</param>
+    procedure DotProduct(OtherVector: Codeunit Vector);
+    begin
+
+    end;
 }

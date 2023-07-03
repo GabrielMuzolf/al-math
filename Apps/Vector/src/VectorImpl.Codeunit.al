@@ -95,6 +95,26 @@ codeunit 70001 "Vector Impl."
             Coordinates.Set(i, Coordinates.Get(i) * Scalar);
     end;
 
+    procedure AreEqual(OtherVector: Codeunit Vector);
+    begin
+
+    end;
+
+    procedure AddVector(OtherVector: Codeunit Vector);
+    begin
+
+    end;
+
+    procedure SubtractVector(OtherVector: Codeunit Vector);
+    begin
+
+    end;
+
+    procedure DotProduct(OtherVector: Codeunit Vector);
+    begin
+
+    end;
+
     local procedure SetDim(NewDim: Integer)
     begin
         if NewDim <= 0 then
