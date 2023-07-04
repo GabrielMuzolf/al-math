@@ -107,7 +107,7 @@ codeunit 70000 Vector
     /// <param name="OtherVector">The vector to add.</param>
     procedure AddVector(OtherVector: Codeunit Vector);
     begin
-
+        VectorImpl.AddVector(OtherVector);
     end;
 
     /// <summary>
@@ -116,7 +116,7 @@ codeunit 70000 Vector
     /// <param name="OtherVector">The vector to subtract.</param>
     procedure SubtractVector(OtherVector: Codeunit Vector);
     begin
-
+        VectorImpl.SubtractVector(OtherVector);
     end;
 
     /// <summary>
@@ -125,7 +125,7 @@ codeunit 70000 Vector
     /// <param name="OtherVector">The vector to calculate the dot product with.</param>
     procedure DotProduct(OtherVector: Codeunit Vector);
     begin
-
+        VectorImpl.DotProduct(OtherVector);
     end;
 
     /// <summary>

@@ -289,6 +289,82 @@ codeunit 80000 "Vector Test"
         LibraryAssert.IsTrue(Vector_X.AreEqual(Vector_Y), 'The vectors are not equal.');
     end;
 
+    [Test]
+    procedure VectorsAdditionTest()
+    var
+        Vector_X: Codeunit Vector;
+        Vector_Y: Codeunit Vector;
+        Vector_Z: Codeunit Vector;
+    begin
+        //[SCENARIO] Tests the addition of vectors.
+
+        //[GIVEN] An initialized first Vector_X.
+        Vector_X.Initialize('[1,2,3]');
+
+        //[AND] An initialized second Vector_Y.
+        Vector_Y.Initialize('[3,2,1]');
+
+        //[AND] An initialized Vector_Z which is the sum of Vector_X and Vector_Y.
+        Vector_Z.Initialize('[4,4,4]');
+
+        //[WHEN] Vector_Y is added to Vector_X.
+        Vector_X.AddVector(Vector_Y);
+
+        //[THEN] The AreEqual method returns true for Vector_X and Vector_Z.
+        LibraryAssert.IsTrue(Vector_X.AreEqual(Vector_Z), 'The vectors have not been added properly.');
+    end;
+
+    [Test]
+    procedure VectorsSubtractionTest()
+    var
+        Vector_X: Codeunit Vector;
+        Vector_Y: Codeunit Vector;
+        Vector_Z: Codeunit Vector;
+    begin
+        //[SCENARIO] Tests the subtraction of vectors.
+
+        //[GIVEN] An initialized first Vector_X.
+        Vector_X.Initialize('[1,2,3]');
+
+        //[AND] An initialized second Vector_Y.
+        Vector_Y.Initialize('[3,2,1]');
+
+        //[AND] An initialized Vector_Z which is the subtraction of Vector_X by Vector_Y.
+        Vector_Z.Initialize('[-2,0,2]');
+
+        //[WHEN] Vector_Y is subtracted from Vector_X.
+        Vector_X.SubtractVector(Vector_Y);
+
+        //[THEN] The AreEqual method returns true for Vector_X and Vector_Z.
+        LibraryAssert.IsTrue(Vector_X.AreEqual(Vector_Z), 'The vectors have not been subtracted properly.');
+    end;
+
+    [Test]
+    procedure VectorsDotProductTest()
+    var
+        Vector_X: Codeunit Vector;
+        Vector_Y: Codeunit Vector;
+        Vector_Z: Codeunit Vector;
+    begin
+        //[SCENARIO] Tests the dot product of vectors.
+
+        //[GIVEN] An initialized first Vector_X.
+        Vector_X.Initialize('[1,2,3]');
+
+        //[AND] An initialized second Vector_Y.
+        Vector_Y.Initialize('[3,2,1]');
+
+        //[AND] An initialized Vector_Z which is the dot product of Vector_X and Vector_Y.
+        Vector_Z.Initialize('[3,4,3]');
+
+        //[WHEN] Vector_Y is multiplied by Vector_X.
+        Vector_X.DotProduct(Vector_Y);
+
+        //[THEN] The AreEqual method returns true for Vector_X and Vector_Z.
+        LibraryAssert.IsTrue(Vector_X.AreEqual(Vector_Z), 'The vectors have not been multiplied properly.');
+    end;
+
+
     local procedure GetDefaultCoordinates() Coordinates: List of [Decimal]
     begin
         Coordinates.Add(4);
