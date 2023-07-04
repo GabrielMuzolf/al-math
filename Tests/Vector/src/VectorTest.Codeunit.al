@@ -238,12 +238,16 @@ codeunit 80000 "Vector Test"
     var
         Vector: Codeunit Vector;
         Coordinates: List of [Decimal];
+        Dim: Integer;
         Scalar: Decimal;
     begin
         //[SCENARIO] Tests the multiplication of vector by scalar.
 
-        //[GIVEN] Default test coordinates.
-        Coordinates := GetDefaultCoordinates();
+        //[GIVEN] The vector dimension.
+        Dim := Any.IntegerInRange(1, 10);
+
+        //[AND] A list of random vector coordinates.
+        Coordinates := LibraryVectorTest.GetRandomList(Dim);
 
         //[AND] An initialized vector.
         Vector.Initialize(Coordinates);
@@ -257,6 +261,32 @@ codeunit 80000 "Vector Test"
         //[THEN] The GetVector method should return the coordinates multiplied by the scalar.
         LibraryVectorTest.MultipleListByNumber(Coordinates, Scalar);
         LibraryMathAssert.AreEqual(Coordinates, Vector.GetVector(), 'The vector coordinates multiplied by scalar are incorrect.');
+    end;
+
+    [Test]
+    procedure AreVectorsEqualTest()
+    var
+        Vector_X, Vector_Y : Codeunit Vector;
+        Coordinates: List of [Decimal];
+        Dim: Integer;
+    begin
+        //[SCENARIO] Tests the equality of vectors.
+
+        //[GIVEN] The vector dimension.
+        Dim := Any.IntegerInRange(1, 10);
+
+        //[AND] A list of random vector coordinates.
+        Coordinates := LibraryVectorTest.GetRandomList(Dim);
+
+        //[AND] An initialized Vector_X by Coordinates.
+        Vector_X.Initialize(Coordinates);
+
+        //[AND] An initialized Vector_Y by Coordinates.
+        Vector_Y.Initialize(Coordinates);
+
+        //[WHEN] The AreEqual method is called.
+        //[THEN] The method returns true.
+        LibraryAssert.IsTrue(Vector_X.AreEqual(Vector_Y), 'The vectors are not equal.');
     end;
 
     local procedure GetDefaultCoordinates() Coordinates: List of [Decimal]

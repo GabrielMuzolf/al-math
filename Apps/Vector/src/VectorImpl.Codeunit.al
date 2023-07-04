@@ -95,7 +95,7 @@ codeunit 70001 "Vector Impl."
             Coordinates.Set(i, Coordinates.Get(i) * Scalar);
     end;
 
-    procedure AreEqual(OtherVector: Codeunit Vector);
+    procedure AreEqual(OtherVector: Codeunit Vector): Boolean;
     begin
 
     end;
