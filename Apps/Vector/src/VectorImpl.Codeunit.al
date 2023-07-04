@@ -96,8 +96,22 @@ codeunit 70001 "Vector Impl."
     end;
 
     procedure AreEqual(OtherVector: Codeunit Vector): Boolean;
+    var
+        OtherVectorCoordinates: List of [Decimal];
+        i: Integer;
     begin
+        ErrIfVectorIsNotInitialized();
+        OtherVector.ErrIfVectorIsNotInitialized();
 
+        if Dim <> OtherVector.GetDim() then
+            exit;
+
+        OtherVectorCoordinates := OtherVector.GetVector();
+        for i := 1 to Coordinates.Count() do
+            if Coordinates.Get(i) <> OtherVectorCoordinates.Get(i) then
+                exit;
+
+        exit(true);
     end;
 
     procedure AddVector(OtherVector: Codeunit Vector);
