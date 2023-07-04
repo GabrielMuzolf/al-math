@@ -96,7 +96,7 @@ codeunit 70000 Vector
     /// </summary>
     /// <param name="OtherVector">The vector to compare with.</param>
     /// <returns>True if the vector is equal to the OtherVector; otherwise, false.</returns>
-    procedure AreEqual(OtherVector: Codeunit Vector): Boolean;
+    procedure AreEqual(OtherVector: Codeunit Vector): Boolean
     begin
         exit(VectorImpl.AreEqual(OtherVector));
     end;
@@ -105,7 +105,7 @@ codeunit 70000 Vector
     /// Adds the <paramref name="OtherVector"/> to the vector.
     /// </summary>
     /// <param name="OtherVector">The vector to add.</param>
-    procedure AddVector(OtherVector: Codeunit Vector);
+    procedure AddVector(OtherVector: Codeunit Vector)
     begin
         VectorImpl.AddVector(OtherVector);
     end;
@@ -114,7 +114,7 @@ codeunit 70000 Vector
     /// Subtracts the <paramref name="OtherVector"/> from the vector.
     /// </summary>
     /// <param name="OtherVector">The vector to subtract.</param>
-    procedure SubtractVector(OtherVector: Codeunit Vector);
+    procedure SubtractVector(OtherVector: Codeunit Vector)
     begin
         VectorImpl.SubtractVector(OtherVector);
     end;
@@ -123,7 +123,7 @@ codeunit 70000 Vector
     /// Calculates the dot product of the vector with the <paramref name="OtherVector"/>.
     /// </summary>
     /// <param name="OtherVector">The vector to calculate the dot product with.</param>
-    procedure DotProduct(OtherVector: Codeunit Vector);
+    procedure DotProduct(OtherVector: Codeunit Vector)
     begin
         VectorImpl.DotProduct(OtherVector);
     end;

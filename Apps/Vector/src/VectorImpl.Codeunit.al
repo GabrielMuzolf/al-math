@@ -9,6 +9,7 @@ codeunit 70001 "Vector Impl."
         InvalidDimensionErr: Label 'The vector dimension cannot be equal to ''%1''. It must be greater than zero.', Comment = '%1 = The Invalid Dimension';
         UnparsableTextErr: Label 'The text ''%1'' cannot be parsed to the vector. The available format is [x,y,z, ...]. The decimal separator must be a dot.', Comment = '%1 = Unparsable Text';
         VectorNotInitalizedErr: Label 'The vector is not initialized.';
+        DifferentDimensionsErr: Label 'Vectors have different dimensions.';
 
     procedure Initialize(NewDim: Integer)
     var
@@ -95,16 +96,12 @@ codeunit 70001 "Vector Impl."
             Coordinates.Set(i, Coordinates.Get(i) * Scalar);
     end;
 
-    procedure AreEqual(OtherVector: Codeunit Vector): Boolean;
+    procedure AreEqual(OtherVector: Codeunit Vector): Boolean
     var
         OtherVectorCoordinates: List of [Decimal];
         i: Integer;
     begin
-        ErrIfVectorIsNotInitialized();
-        OtherVector.ErrIfVectorIsNotInitialized();
-
-        if Dim <> OtherVector.GetDim() then
-            exit;
+        ErrIfVectorsNotInitialized(OtherVector);
 
         OtherVectorCoordinates := OtherVector.GetVector();
         for i := 1 to Coordinates.Count() do
@@ -114,19 +111,37 @@ codeunit 70001 "Vector Impl."
         exit(true);
     end;
 
-    procedure AddVector(OtherVector: Codeunit Vector);
+    procedure AddVector(OtherVector: Codeunit Vector)
+    var
+        OtherVectorCoordinates: List of [Decimal];
+        i: Integer;
     begin
-
+        ErrIfVectorsNotInitialized(OtherVector);
+        OtherVectorCoordinates := OtherVector.GetVector();
+        for i := 1 to Coordinates.Count() do
+            Coordinates.Set(i, Coordinates.Get(i) + OtherVectorCoordinates.Get(i));
     end;
 
-    procedure SubtractVector(OtherVector: Codeunit Vector);
+    procedure SubtractVector(OtherVector: Codeunit Vector)
+    var
+        OtherVectorCoordinates: List of [Decimal];
+        i: Integer;
     begin
-
+        ErrIfVectorsNotInitialized(OtherVector);
+        OtherVectorCoordinates := OtherVector.GetVector();
+        for i := 1 to Coordinates.Count() do
+            Coordinates.Set(i, Coordinates.Get(i) - OtherVectorCoordinates.Get(i));
     end;
 
-    procedure DotProduct(OtherVector: Codeunit Vector);
+    procedure DotProduct(OtherVector: Codeunit Vector)
+    var
+        OtherVectorCoordinates: List of [Decimal];
+        i: Integer;
     begin
-
+        ErrIfVectorsNotInitialized(OtherVector);
+        OtherVectorCoordinates := OtherVector.GetVector();
+        for i := 1 to Coordinates.Count() do
+            Coordinates.Set(i, Coordinates.Get(i) * OtherVectorCoordinates.Get(i));
     end;
 
     procedure ErrIfVectorIsNotInitialized()
@@ -187,5 +202,13 @@ codeunit 70001 "Vector Impl."
             Evaluate(DecimalValue, ListOfText.Get(i));
             ListOfDecimals.Add(DecimalValue);
         end;
+    end;
+
+    local procedure ErrIfVectorsNotInitialized(var OtherVector: Codeunit Vector)
+    begin
+        ErrIfVectorIsNotInitialized();
+        OtherVector.ErrIfVectorIsNotInitialized();
+        if Dim <> OtherVector.GetDim() then
+            Error(DifferentDimensionsErr);
     end;
 }
