@@ -1,0 +1,32 @@
+{
+  "id": "5f4420dd-04e3-4423-bf02-96acfc86c427",
+  "name": "Combinatorics Test",
+  "publisher": "Gabriel Muzolf",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "22.0.0.0",
+  "idRanges": [
+    {
+      "from": 80002,
+      "to": 80002
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "11.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
