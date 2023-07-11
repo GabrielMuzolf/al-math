@@ -10,7 +10,7 @@ codeunit 70002 Combinatorics
     /// </summary>
     /// <param name="n">The integer for which factorial is calculated.</param>
     /// <returns>The factorial of n as an integer.</returns>
-    procedure Factorial(n: Integer): Integer
+    procedure Factorial(n: Integer): BigInteger
     begin
         exit(CombinatoricsImpl.Factorial(n));
     end;
@@ -21,7 +21,7 @@ codeunit 70002 Combinatorics
     /// <param name="n">The total number of items.</param>
     /// <param name="k">The number of items to be chosen.</param>
     /// <returns>The number of combinations (n choose k) as an integer.</returns>
-    procedure Combination(n: Integer; k: Integer): Integer
+    procedure Combination(n: Integer; k: Integer): BigInteger
     begin
         exit(CombinatoricsImpl.Combination(n, k));
     end;
@@ -32,7 +32,7 @@ codeunit 70002 Combinatorics
     /// <param name="n">The total number of items.</param>
     /// <param name="k">The number of items selected in each variation.</param>
     /// <returns>The number of variations with repetition as an integer.</returns>
-    procedure VariationWithRepetition(n: Integer; k: Integer): Integer
+    procedure VariationWithRepetition(n: Integer; k: Integer): BigInteger
     begin
         exit(CombinatoricsImpl.VariationWithRepetition(n, k));
     end;
@@ -43,7 +43,7 @@ codeunit 70002 Combinatorics
     /// <param name="n">The total number of items.</param>
     /// <param name="k">The number of items selected in each variation.</param>
     /// <returns>The number of variations without repetition as an integer.</returns>
-    procedure VariationWithoutRepetition(n: Integer; k: Integer): Integer
+    procedure VariationWithoutRepetition(n: Integer; k: Integer): BigInteger
     begin
         exit(CombinatoricsImpl.VariationWithoutRepetition(n, k));
     end;
