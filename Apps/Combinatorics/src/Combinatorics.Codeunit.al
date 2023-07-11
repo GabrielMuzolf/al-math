@@ -27,6 +27,17 @@ codeunit 70002 Combinatorics
     end;
 
     /// <summary>
+    /// Calculates the combination with repetition (n choose k), which represents the number of ways to choose k items from a set of n items with repetition allowed.
+    /// </summary>
+    /// <param name="n">The total number of items.</param>
+    /// <param name="k">The number of items to be chosen.</param>
+    /// <returns>The number of combinations with repetition (n choose k) as an integer.</returns>
+    procedure CombinationWithRepetition(n: Integer; k: Integer): BigInteger
+    begin
+        exit(CombinatoricsImpl.CombinationWithRepetition(n, k));
+    end;
+
+    /// <summary>
     /// Calculates the variation with repetition.
     /// </summary>
     /// <param name="n">The total number of items.</param>
