@@ -1,6 +1,6 @@
 {
-  "id": "e9113bed-7f9a-4300-a116-5760fc7e77a6",
-  "name": "Vector Test",
+  "id": "5f4420dd-04e3-4423-bf02-96acfc86c427",
+  "name": "Combinatorics Test",
   "publisher": "Gabriel Muzolf",
   "version": "1.0.0.0",
   "brief": "",
@@ -12,8 +12,8 @@
   "logo": "",
   "dependencies": [
     {
-      "id": "88005b7c-99ea-4134-a6b2-465498ba700b",
-      "name": "Vector",
+      "id": "10ed1ad1-c3ba-4229-90c5-5108e7907c88",
+      "name": "Combinatorics",
       "publisher": "Gabriel Muzolf",
       "version": "1.0.0.0"
     },
@@ -35,8 +35,8 @@
   "application": "22.0.0.0",
   "idRanges": [
     {
-      "from": 80000,
-      "to": 80001
+      "from": 80002,
+      "to": 80002
     }
   ],
   "resourceExposurePolicy": {
