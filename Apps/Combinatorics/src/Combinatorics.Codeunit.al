@@ -38,6 +38,17 @@ codeunit 70002 Combinatorics
     end;
 
     /// <summary>
+    /// Calculates the variation without repetition.
+    /// </summary>
+    /// <param name="n">The total number of items.</param>
+    /// <param name="k">The number of items selected in each variation.</param>
+    /// <returns>The number of variations without repetition as an integer.</returns>
+    procedure Variation(n: Integer; k: Integer): BigInteger
+    begin
+        exit(CombinatoricsImpl.Variation(n, k));
+    end;
+
+    /// <summary>
     /// Calculates the variation with repetition.
     /// </summary>
     /// <param name="n">The total number of items.</param>
@@ -46,16 +57,5 @@ codeunit 70002 Combinatorics
     procedure VariationWithRepetition(n: Integer; k: Integer): BigInteger
     begin
         exit(CombinatoricsImpl.VariationWithRepetition(n, k));
-    end;
-
-    /// <summary>
-    /// Calculates the variation without repetition.
-    /// </summary>
-    /// <param name="n">The total number of items.</param>
-    /// <param name="k">The number of items selected in each variation.</param>
-    /// <returns>The number of variations without repetition as an integer.</returns>
-    procedure VariationWithoutRepetition(n: Integer; k: Integer): BigInteger
-    begin
-        exit(CombinatoricsImpl.VariationWithoutRepetition(n, k));
     end;
 }

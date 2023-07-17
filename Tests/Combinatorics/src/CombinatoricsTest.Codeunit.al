@@ -82,4 +82,54 @@ codeunit 80002 "Combinatorics Test"
         asserterror Combinatorics.CombinationWithRepetition(-4, -3);
         LibraryAssert.ExpectedError(IncorrectCombinationWithRepetitionErr);
     end;
+
+    [Test]
+    procedure VariationTests()
+    var
+        Combinatorics: Codeunit Combinatorics;
+        IncorrectVariationErr: Label 'The value of k must be less than or equal to the value of n and both numbers must be greater than or equal to 0.', Locked = true;
+    begin
+        //[SCENARIO] Tests different variation calculations.
+        LibraryAssert.AreEqual(1L, Combinatorics.Variation(1, 1), 'Variation (1 choose 1) is incorrectly calculated.');
+        LibraryAssert.AreEqual(24L, Combinatorics.Variation(4, 4), 'Variation (4 choose 4) is incorrectly calculated.');
+        LibraryAssert.AreEqual(60L, Combinatorics.Variation(5, 3), 'Variation (5 choose 4) is incorrectly calculated.');
+        LibraryAssert.AreEqual(56L, Combinatorics.Variation(8, 2), 'Variation (8 choose 2) is incorrectly calculated.');
+        LibraryAssert.AreEqual(5040L, Combinatorics.Variation(7, 6), 'Variation (7 choose 6) is incorrectly calculated.');
+
+        asserterror Combinatorics.Variation(-4, 3);
+        LibraryAssert.ExpectedError(IncorrectVariationErr);
+
+        asserterror Combinatorics.Variation(4, -3);
+        LibraryAssert.ExpectedError(IncorrectVariationErr);
+
+        asserterror Combinatorics.Variation(-4, -3);
+        LibraryAssert.ExpectedError(IncorrectVariationErr);
+
+        asserterror Combinatorics.Variation(5, 7);
+        LibraryAssert.ExpectedError(IncorrectVariationErr);
+    end;
+
+    [Test]
+    procedure VariationWithRepetitionTests()
+    var
+        Combinatorics: Codeunit Combinatorics;
+        IncorrectVariationWithRepetitionErr: Label 'Both numbers must be greater than or equal to 0.', Locked = true;
+    begin
+        //[SCENARIO] Tests different variation with repetition calculations.
+
+        LibraryAssert.AreEqual(1L, Combinatorics.VariationWithRepetition(5, 0), 'Variation with repetition (1 choose 1) is incorrectly calculated.');
+        LibraryAssert.AreEqual(0L, Combinatorics.VariationWithRepetition(0, 5), 'Variation with repetition (4 choose 4) is incorrectly calculated.');
+        LibraryAssert.AreEqual(125L, Combinatorics.VariationWithRepetition(5, 3), 'Variation with repetition (5 choose 4) is incorrectly calculated.');
+        LibraryAssert.AreEqual(64L, Combinatorics.VariationWithRepetition(8, 2), 'Variation with repetition (8 choose 2) is incorrectly calculated.');
+        LibraryAssert.AreEqual(117649L, Combinatorics.VariationWithRepetition(7, 6), 'Variation with repetition (7 choose 6) is incorrectly calculated.');
+
+        asserterror Combinatorics.Variation(-4, 3);
+        LibraryAssert.ExpectedError(IncorrectVariationWithRepetitionErr);
+
+        asserterror Combinatorics.Variation(4, -3);
+        LibraryAssert.ExpectedError(IncorrectVariationWithRepetitionErr);
+
+        asserterror Combinatorics.Variation(-4, -3);
+        LibraryAssert.ExpectedError(IncorrectVariationWithRepetitionErr);
+    end;
 }

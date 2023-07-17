@@ -35,12 +35,12 @@ codeunit 70003 "Combinatorics Impl."
         exit(Factorial(n + k - 1) / (Factorial(k) * Factorial(n - 1)));
     end;
 
-    procedure VariationWithRepetition(n: Integer; k: Integer): BigInteger
+    procedure Variation(n: Integer; l: Integer): BigInteger
     begin
 
     end;
 
-    procedure VariationWithoutRepetition(n: Integer; l: Integer): BigInteger
+    procedure VariationWithRepetition(n: Integer; k: Integer): BigInteger
     begin
 
     end;
