@@ -12,7 +12,7 @@ codeunit 80000 "Vector Test"
     [Test]
     procedure InitializeVectorByDimTest()
     var
-        Vector: Codeunit Vector;
+        VectorGM: Codeunit "Vector GM";
         Dim: Integer;
     begin
         //[SCENARIO] Tests the initialization of a vector based on vector dimension.
@@ -21,19 +21,19 @@ codeunit 80000 "Vector Test"
         Dim := Any.IntegerInRange(1, 10);
 
         //[WHEN] The Initialize method is called for the dimension.
-        Vector.Initialize(Dim);
+        VectorGM.Initialize(Dim);
 
         //[THEN] The GetDim method returns the dimension.
-        LibraryAssert.AreEqual(Dim, Vector.GetDim(), 'The vector dimension is incorrect.');
+        LibraryAssert.AreEqual(Dim, VectorGM.GetDim(), 'The vector dimension is incorrect.');
 
         //[AND] The GetVector returns the list of size dimension with all zero elements.
-        LibraryMathAssert.AreEqual(LibraryVectorTest.GetListOfZeros(Dim), Vector.GetVector(), 'The vector coordinates are incorrect.');
+        LibraryMathAssert.AreEqual(LibraryVectorTest.GetListOfZeros(Dim), VectorGM.GetVector(), 'The vector coordinates are incorrect.');
     end;
 
     [Test]
     procedure InitializeVectorBySmallerThanZeroDimTest()
     var
-        Vector: Codeunit Vector;
+        VectorGM: Codeunit "Vector GM";
         Dim: Integer;
         InvalidDimensionErr: Label 'The vector dimension cannot be equal to ''%1''. It must be greater than zero.', Comment = '%1 = The Invalid Dimension', Locked = true;
     begin
@@ -44,7 +44,7 @@ codeunit 80000 "Vector Test"
 
         //[WHEN] The Initialize method is called for the dimension.
         //[THEN] An error should occur.
-        asserterror Vector.Initialize(Dim);
+        asserterror VectorGM.Initialize(Dim);
 
         //[AND] The expected error message should match the predefined label.
         LibraryAssert.ExpectedError(StrSubstNo(InvalidDimensionErr, Dim));
@@ -53,7 +53,7 @@ codeunit 80000 "Vector Test"
     [Test]
     procedure InitializeVectorByListOfCoordinatesTest()
     var
-        Vector: Codeunit Vector;
+        VectorGM: Codeunit "Vector GM";
         Coordinates: List of [Decimal];
         Dim: Integer;
     begin
@@ -66,19 +66,19 @@ codeunit 80000 "Vector Test"
         Coordinates := LibraryVectorTest.GetRandomList(Dim);
 
         //[WHEN] The Initialize method is called with the list of coordinates.
-        Vector.Initialize(Coordinates);
+        VectorGM.Initialize(Coordinates);
 
         //[THEN] The GetDim method should return the expected dimension.
-        LibraryAssert.AreEqual(Dim, Vector.GetDim(), 'The vector dimension is incorrect.');
+        LibraryAssert.AreEqual(Dim, VectorGM.GetDim(), 'The vector dimension is incorrect.');
 
         //[AND] The GetVector method should return the expected coordinates.
-        LibraryMathAssert.AreEqual(Coordinates, Vector.GetVector(), 'The vector coordinates are incorrect.');
+        LibraryMathAssert.AreEqual(Coordinates, VectorGM.GetVector(), 'The vector coordinates are incorrect.');
     end;
 
     [Test]
     procedure InitializeVectorByAnEmptyListOfCoordinatesTest()
     var
-        Vector: Codeunit Vector;
+        VectorGM: Codeunit "Vector GM";
         Coordinates: List of [Decimal];
         InvalidDimensionErr: Label 'The vector dimension cannot be equal to ''%1''. It must be greater than zero.', Comment = '%1 = The Invalid Dimension', Locked = true;
     begin
@@ -88,7 +88,7 @@ codeunit 80000 "Vector Test"
 
         //[WHEN] The Initialize method is called with the empty list of coordinates.
         //[THEN] An error should occur.
-        asserterror Vector.Initialize(Coordinates);
+        asserterror VectorGM.Initialize(Coordinates);
 
         //[AND] The expected error message should match the predefined label.
         LibraryAssert.ExpectedError(StrSubstNo(InvalidDimensionErr, Coordinates.Count()));
@@ -97,7 +97,7 @@ codeunit 80000 "Vector Test"
     [Test]
     procedure InitializeVectorByWellFormatedTextTest()
     var
-        Vector: Codeunit Vector;
+        VectorGM: Codeunit "Vector GM";
         Coordinates: List of [Decimal];
         Dim: Integer;
     begin
@@ -110,19 +110,19 @@ codeunit 80000 "Vector Test"
         Coordinates := LibraryVectorTest.GetRandomList(Dim);
 
         //[WHEN] The Initialize method is called for the well formated coordinates in the square brackets [].
-        Vector.Initialize('[' + LibraryVectorTest.GetListAsCommaSeparatedCoordinates(Coordinates) + ']');
+        VectorGM.Initialize('[' + LibraryVectorTest.GetListAsCommaSeparatedCoordinates(Coordinates) + ']');
 
         //[THEN] The GetDim method should return the expected dimension.
-        LibraryAssert.AreEqual(Dim, Vector.GetDim(), 'The vector dimension is incorrect.');
+        LibraryAssert.AreEqual(Dim, VectorGM.GetDim(), 'The vector dimension is incorrect.');
 
         //[AND] The GetVector method should return the expected coordinates.
-        LibraryMathAssert.AreEqual(Coordinates, Vector.GetVector(), 'The vector coordinates are incorrect.');
+        LibraryMathAssert.AreEqual(Coordinates, VectorGM.GetVector(), 'The vector coordinates are incorrect.');
     end;
 
     [Test]
     procedure InitializeVectorByBadFormatedTextTest()
     var
-        Vector: Codeunit Vector;
+        VectorGM: Codeunit "Vector GM";
         UnparsableText: Text;
         UnparsableTextErr: Label 'The text ''%1'' cannot be parsed to the vector. The available format is [x,y,z, ...]. The decimal separator must be a dot.', Comment = '%1 = Unparsable Text', Locked = true;
     begin
@@ -133,7 +133,7 @@ codeunit 80000 "Vector Test"
 
         //[WHEN] The Initialize method is called for the bad formated text.
         //[THEN] An error should occur.
-        asserterror Vector.Initialize(UnparsableText);
+        asserterror VectorGM.Initialize(UnparsableText);
 
         //[AND] The expected error message should match the predefined label.
         LibraryAssert.ExpectedError(StrSubstNo(UnparsableTextErr, UnparsableText));
@@ -142,7 +142,7 @@ codeunit 80000 "Vector Test"
     [Test]
     procedure VectorNotIntializedTest()
     var
-        Vector: Codeunit Vector;
+        VectorGM: Codeunit "Vector GM";
         VectorNotInitalizedErr: Label 'The vector is not initialized.', Locked = true;
     begin
         //[SCENARIO] Tests raising an error if the vector is not initialized for a non-initialized vector.
@@ -151,7 +151,7 @@ codeunit 80000 "Vector Test"
 
         //[WHEN] The ErrIfVectorIsNotInitialized method is called.
         //[THEN] An error should occur.
-        asserterror Vector.ErrIfVectorIsNotInitialized();
+        asserterror VectorGM.ErrIfVectorIsNotInitialized();
 
         //[AND] The expected error message should match the predefined label.
         LibraryAssert.ExpectedError(VectorNotInitalizedErr);
@@ -160,22 +160,22 @@ codeunit 80000 "Vector Test"
     [Test]
     procedure VectorIntializedTest()
     var
-        Vector: Codeunit Vector;
+        VectorGM: Codeunit "Vector GM";
     begin
         //[SCENARIO] Tests raising an error if the vector is not initialized for an initialized vector.
 
         //[GIVEN] An initialized vector.
-        Vector.Initialize(Any.IntegerInRange(1, 10));
+        VectorGM.Initialize(Any.IntegerInRange(1, 10));
 
         //[WHEN] The ErrIfVectorIsNotInitialized method is called.
         //[THEN] No error should occur.
-        Vector.ErrIfVectorIsNotInitialized();
+        VectorGM.ErrIfVectorIsNotInitialized();
     end;
 
     [Test]
     procedure VectorToStringTest()
     var
-        Vector: Codeunit Vector;
+        VectorGM: Codeunit "Vector GM";
         Coordinates: List of [Decimal];
         ExpectedVector: Text;
     begin
@@ -185,20 +185,20 @@ codeunit 80000 "Vector Test"
         Coordinates := LibraryVectorTest.GetRandomList(Any.IntegerInRange(1, 10));
 
         //[AND] An initialized vector.
-        Vector.Initialize(Coordinates);
+        VectorGM.Initialize(Coordinates);
 
         //[AND] An expected Vector as a string representation.
         ExpectedVector := '[' + LibraryVectorTest.GetListAsCommaSeparatedCoordinates(Coordinates) + ']';
 
         //[WHEN] The ToString method is called.
         //[THEN] The method returns the Vector as a string in the format of [x, y, z, ...].
-        LibraryAssert.AreEqual(ExpectedVector, Vector.ToString(), 'The Vector string representation is incorrect.');
+        LibraryAssert.AreEqual(ExpectedVector, VectorGM.ToString(), 'The Vector string representation is incorrect.');
     end;
 
     [Test]
     procedure VectorEuclideanNormTest()
     var
-        Vector: Codeunit Vector;
+        VectorGM: Codeunit "Vector GM";
         Coordinates: List of [Decimal];
     begin
         //[SCENARIO] Tests the Euclidean Norm calculation.
@@ -207,17 +207,17 @@ codeunit 80000 "Vector Test"
         Coordinates := GetDefaultCoordinates();
 
         //[AND] An initialized vector.
-        Vector.Initialize(Coordinates);
+        VectorGM.Initialize(Coordinates);
 
         //[WHEN] The CalculateEuclideanNorm method is called.
         //[THEN] The method returns 5, which is the Euclidean Norm for the default coordinates.
-        LibraryAssert.AreEqual(5, Vector.CalculateEuclideanNorm(), 'The Euclidean Norm is incorrect.');
+        LibraryAssert.AreEqual(5, VectorGM.CalculateEuclideanNorm(), 'The Euclidean Norm is incorrect.');
     end;
 
     [Test]
     procedure VectorTaxicabNormTest()
     var
-        Vector: Codeunit Vector;
+        VectorGM: Codeunit "Vector GM";
         Coordinates: List of [Decimal];
     begin
         //[SCENARIO] Tests the Taxicab Norm calculation.
@@ -226,17 +226,17 @@ codeunit 80000 "Vector Test"
         Coordinates := GetDefaultCoordinates();
 
         //[AND] An initialized vector.
-        Vector.Initialize(Coordinates);
+        VectorGM.Initialize(Coordinates);
 
         //[WHEN] The CalculateTaxicabNorm method is called.
         //[THEN] The method returns 7, which is the Taxicab Norm for the default coordinates.
-        LibraryAssert.AreEqual(7, Vector.CalculateTaxicabNorm(), 'The Taxicab Norm is incorrect.');
+        LibraryAssert.AreEqual(7, VectorGM.CalculateTaxicabNorm(), 'The Taxicab Norm is incorrect.');
     end;
 
     [Test]
     procedure MultipleVectorByScalarTest()
     var
-        Vector: Codeunit Vector;
+        VectorGM: Codeunit "Vector GM";
         Coordinates: List of [Decimal];
         Dim: Integer;
         Scalar: Decimal;
@@ -250,23 +250,23 @@ codeunit 80000 "Vector Test"
         Coordinates := LibraryVectorTest.GetRandomList(Dim);
 
         //[AND] An initialized vector.
-        Vector.Initialize(Coordinates);
+        VectorGM.Initialize(Coordinates);
 
         //[AND] A random scalar value.
         Scalar := Any.IntegerInRange(100);
 
         //[WHEN] The ScalarMultiplication method is called.
-        Vector.ScalarMultiplication(Scalar);
+        VectorGM.ScalarMultiplication(Scalar);
 
         //[THEN] The GetVector method should return the coordinates multiplied by the scalar.
         LibraryVectorTest.MultipleListByNumber(Coordinates, Scalar);
-        LibraryMathAssert.AreEqual(Coordinates, Vector.GetVector(), 'The vector coordinates multiplied by scalar are incorrect.');
+        LibraryMathAssert.AreEqual(Coordinates, VectorGM.GetVector(), 'The vector coordinates multiplied by scalar are incorrect.');
     end;
 
     [Test]
     procedure AreVectorsEqualTest()
     var
-        Vector_X, Vector_Y : Codeunit Vector;
+        VectorGM_X, VectorGM_Y : Codeunit "Vector GM";
         Coordinates: List of [Decimal];
         Dim: Integer;
     begin
@@ -279,89 +279,89 @@ codeunit 80000 "Vector Test"
         Coordinates := LibraryVectorTest.GetRandomList(Dim);
 
         //[AND] An initialized Vector_X by Coordinates.
-        Vector_X.Initialize(Coordinates);
+        VectorGM_X.Initialize(Coordinates);
 
         //[AND] An initialized Vector_Y by Coordinates.
-        Vector_Y.Initialize(Coordinates);
+        VectorGM_Y.Initialize(Coordinates);
 
         //[WHEN] The AreEqual method is called.
         //[THEN] The method returns true.
-        LibraryAssert.IsTrue(Vector_X.AreEqual(Vector_Y), 'The vectors are not equal.');
+        LibraryAssert.IsTrue(VectorGM_X.AreEqual(VectorGM_Y), 'The vectors are not equal.');
     end;
 
     [Test]
     procedure VectorsAdditionTest()
     var
-        Vector_X: Codeunit Vector;
-        Vector_Y: Codeunit Vector;
-        Vector_Z: Codeunit Vector;
+        VectorGM_X: Codeunit "Vector GM";
+        VectorGM_Y: Codeunit "Vector GM";
+        VectorGM_Z: Codeunit "Vector GM";
     begin
         //[SCENARIO] Tests the addition of vectors.
 
         //[GIVEN] An initialized first Vector_X.
-        Vector_X.Initialize('[1,2,3]');
+        VectorGM_X.Initialize('[1,2,3]');
 
         //[AND] An initialized second Vector_Y.
-        Vector_Y.Initialize('[3,2,1]');
+        VectorGM_Y.Initialize('[3,2,1]');
 
         //[AND] An initialized Vector_Z which is the sum of Vector_X and Vector_Y.
-        Vector_Z.Initialize('[4,4,4]');
+        VectorGM_Z.Initialize('[4,4,4]');
 
         //[WHEN] Vector_Y is added to Vector_X.
-        Vector_X.AddVector(Vector_Y);
+        VectorGM_X.AddVector(VectorGM_Y);
 
         //[THEN] The AreEqual method returns true for Vector_X and Vector_Z.
-        LibraryAssert.IsTrue(Vector_X.AreEqual(Vector_Z), 'The vectors have not been added properly.');
+        LibraryAssert.IsTrue(VectorGM_X.AreEqual(VectorGM_Z), 'The vectors have not been added properly.');
     end;
 
     [Test]
     procedure VectorsSubtractionTest()
     var
-        Vector_X: Codeunit Vector;
-        Vector_Y: Codeunit Vector;
-        Vector_Z: Codeunit Vector;
+        VectorGM_X: Codeunit "Vector GM";
+        VectorGM_Y: Codeunit "Vector GM";
+        VectorGM_Z: Codeunit "Vector GM";
     begin
         //[SCENARIO] Tests the subtraction of vectors.
 
         //[GIVEN] An initialized first Vector_X.
-        Vector_X.Initialize('[1,2,3]');
+        VectorGM_X.Initialize('[1,2,3]');
 
         //[AND] An initialized second Vector_Y.
-        Vector_Y.Initialize('[3,2,1]');
+        VectorGM_Y.Initialize('[3,2,1]');
 
         //[AND] An initialized Vector_Z which is the subtraction of Vector_X by Vector_Y.
-        Vector_Z.Initialize('[-2,0,2]');
+        VectorGM_Z.Initialize('[-2,0,2]');
 
         //[WHEN] Vector_Y is subtracted from Vector_X.
-        Vector_X.SubtractVector(Vector_Y);
+        VectorGM_X.SubtractVector(VectorGM_Y);
 
         //[THEN] The AreEqual method returns true for Vector_X and Vector_Z.
-        LibraryAssert.IsTrue(Vector_X.AreEqual(Vector_Z), 'The vectors have not been subtracted properly.');
+        LibraryAssert.IsTrue(VectorGM_X.AreEqual(VectorGM_Z), 'The vectors have not been subtracted properly.');
     end;
 
     [Test]
     procedure VectorsDotProductTest()
     var
-        Vector_X: Codeunit Vector;
-        Vector_Y: Codeunit Vector;
-        Vector_Z: Codeunit Vector;
+        VectorGM_X: Codeunit "Vector GM";
+        VectorGM_Y: Codeunit "Vector GM";
+        VectorGM_Z: Codeunit "Vector GM";
     begin
         //[SCENARIO] Tests the dot product of vectors.
 
         //[GIVEN] An initialized first Vector_X.
-        Vector_X.Initialize('[1,2,3]');
+        VectorGM_X.Initialize('[1,2,3]');
 
         //[AND] An initialized second Vector_Y.
-        Vector_Y.Initialize('[3,2,1]');
+        VectorGM_Y.Initialize('[3,2,1]');
 
         //[AND] An initialized Vector_Z which is the dot product of Vector_X and Vector_Y.
-        Vector_Z.Initialize('[3,4,3]');
+        VectorGM_Z.Initialize('[3,4,3]');
 
         //[WHEN] Vector_Y is multiplied by Vector_X.
-        Vector_X.DotProduct(Vector_Y);
+        VectorGM_X.DotProduct(VectorGM_Y);
 
         //[THEN] The AreEqual method returns true for Vector_X and Vector_Z.
-        LibraryAssert.IsTrue(Vector_X.AreEqual(Vector_Z), 'The vectors have not been multiplied properly.');
+        LibraryAssert.IsTrue(VectorGM_X.AreEqual(VectorGM_Z), 'The vectors have not been multiplied properly.');
     end;
 
 

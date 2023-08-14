@@ -1,4 +1,4 @@
-codeunit 70001 "Vector Impl."
+codeunit 70001 "Vector Impl. GM"
 {
     Access = Internal;
 
@@ -96,7 +96,7 @@ codeunit 70001 "Vector Impl."
             Coordinates.Set(i, Coordinates.Get(i) * Scalar);
     end;
 
-    procedure AreEqual(OtherVector: Codeunit Vector): Boolean
+    procedure AreEqual(OtherVector: Codeunit "Vector GM"): Boolean
     var
         OtherVectorCoordinates: List of [Decimal];
         i: Integer;
@@ -111,7 +111,7 @@ codeunit 70001 "Vector Impl."
         exit(true);
     end;
 
-    procedure AddVector(OtherVector: Codeunit Vector)
+    procedure AddVector(OtherVector: Codeunit "Vector GM")
     var
         OtherVectorCoordinates: List of [Decimal];
         i: Integer;
@@ -122,7 +122,7 @@ codeunit 70001 "Vector Impl."
             Coordinates.Set(i, Coordinates.Get(i) + OtherVectorCoordinates.Get(i));
     end;
 
-    procedure SubtractVector(OtherVector: Codeunit Vector)
+    procedure SubtractVector(OtherVector: Codeunit "Vector GM")
     var
         OtherVectorCoordinates: List of [Decimal];
         i: Integer;
@@ -133,7 +133,7 @@ codeunit 70001 "Vector Impl."
             Coordinates.Set(i, Coordinates.Get(i) - OtherVectorCoordinates.Get(i));
     end;
 
-    procedure DotProduct(OtherVector: Codeunit Vector)
+    procedure DotProduct(OtherVector: Codeunit "Vector GM")
     var
         OtherVectorCoordinates: List of [Decimal];
         i: Integer;
@@ -204,7 +204,7 @@ codeunit 70001 "Vector Impl."
         end;
     end;
 
-    local procedure ErrIfVectorsNotInitialized(var OtherVector: Codeunit Vector)
+    local procedure ErrIfVectorsNotInitialized(var OtherVector: Codeunit "Vector GM")
     begin
         ErrIfVectorIsNotInitialized();
         OtherVector.ErrIfVectorIsNotInitialized();

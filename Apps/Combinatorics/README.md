@@ -5,7 +5,7 @@ It includes functionality for factorial, combination, combination with repetitio
 ```
     procedure CombinatoricsDemo()
     var
-        Combinatorics: Codeunit Combinatorics;
+        Combinatorics: Codeunit "Combinatorics GM";
     begin
         Message('5! = ' + Format(Combinatorics.Factorial(5)));
         Message('Combination (5 choose 3) = ' + Format(Combinatorics.Combination(5, 3)));
