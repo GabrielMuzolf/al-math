@@ -1,9 +1,9 @@
-codeunit 70002 Combinatorics
+codeunit 70002 "Combinatorics GM"
 {
     Access = Public;
 
     var
-        CombinatoricsImpl: Codeunit "Combinatorics Impl.";
+        CombinatoricsImplGM: Codeunit "Combinatorics Impl. GM";
 
     /// <summary>
     /// Calculates the factorial of an integer n.
@@ -12,7 +12,7 @@ codeunit 70002 Combinatorics
     /// <returns>The factorial of n as an integer.</returns>
     procedure Factorial(n: Integer): BigInteger
     begin
-        exit(CombinatoricsImpl.Factorial(n));
+        exit(CombinatoricsImplGM.Factorial(n));
     end;
 
     /// <summary>
@@ -23,7 +23,7 @@ codeunit 70002 Combinatorics
     /// <returns>The number of combinations (n choose k) as an integer.</returns>
     procedure Combination(n: Integer; k: Integer): BigInteger
     begin
-        exit(CombinatoricsImpl.Combination(n, k));
+        exit(CombinatoricsImplGM.Combination(n, k));
     end;
 
     /// <summary>
@@ -34,7 +34,7 @@ codeunit 70002 Combinatorics
     /// <returns>The number of combinations with repetition (n choose k) as an integer.</returns>
     procedure CombinationWithRepetition(n: Integer; k: Integer): BigInteger
     begin
-        exit(CombinatoricsImpl.CombinationWithRepetition(n, k));
+        exit(CombinatoricsImplGM.CombinationWithRepetition(n, k));
     end;
 
     /// <summary>
@@ -45,7 +45,7 @@ codeunit 70002 Combinatorics
     /// <returns>The number of variations without repetition as an integer.</returns>
     procedure Variation(n: Integer; k: Integer): BigInteger
     begin
-        exit(CombinatoricsImpl.Variation(n, k));
+        exit(CombinatoricsImplGM.Variation(n, k));
     end;
 
     /// <summary>
@@ -56,6 +56,6 @@ codeunit 70002 Combinatorics
     /// <returns>The number of variations with repetition as an integer.</returns>
     procedure VariationWithRepetition(n: Integer; k: Integer): BigInteger
     begin
-        exit(CombinatoricsImpl.VariationWithRepetition(n, k));
+        exit(CombinatoricsImplGM.VariationWithRepetition(n, k));
     end;
 }

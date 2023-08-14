@@ -1,12 +1,12 @@
 /// <summary>
 /// Codeunit representing a vector and providing operations on vectors, such as addition, multiplication, length calculation, scalar operations, and more.
 /// </summary>
-codeunit 70000 Vector
+codeunit 70000 "Vector GM"
 {
     Access = Public;
 
     var
-        VectorImpl: Codeunit "Vector Impl.";
+        VectorImplGm: Codeunit "Vector Impl. GM";
 
     /// <summary>
     /// Initializes a vector with the specified number of dimensions.
@@ -15,7 +15,7 @@ codeunit 70000 Vector
     /// <param name="Dim">The number of dimensions for the vector.</param>
     procedure Initialize(Dim: Integer)
     begin
-        VectorImpl.Initialize(Dim);
+        VectorImplGm.Initialize(Dim);
     end;
 
     /// <summary>
@@ -24,7 +24,7 @@ codeunit 70000 Vector
     /// <param name="Coordinates">The list of coordinates to initialize the vector.</param>
     procedure Initialize(Coordinates: List of [Decimal])
     begin
-        VectorImpl.Initialize(Coordinates);
+        VectorImplGm.Initialize(Coordinates);
     end;
 
     /// <summary>
@@ -34,7 +34,7 @@ codeunit 70000 Vector
     /// <param name="FormattedVector">The well-formatted string representation of the vector.</param>
     procedure Initialize(VectorAsText: Text)
     begin
-        VectorImpl.Initialize(VectorAsText);
+        VectorImplGm.Initialize(VectorAsText);
     end;
 
     /// <summary>
@@ -43,7 +43,7 @@ codeunit 70000 Vector
     /// <returns>The dimension of the vector as an integer.</returns>
     procedure GetDim(): Integer
     begin
-        exit(VectorImpl.GetDim());
+        exit(VectorImplGm.GetDim());
     end;
 
     /// <summary>
@@ -52,7 +52,7 @@ codeunit 70000 Vector
     /// <returns>The vector as a list of coordinates.</returns>
     procedure GetVector(): List of [Decimal]
     begin
-        exit(VectorImpl.GetVector());
+        exit(VectorImplGm.GetVector());
     end;
 
     /// <summary>
@@ -61,7 +61,7 @@ codeunit 70000 Vector
     /// <returns>A string representation of the vector in the specified format.</returns>
     procedure ToString(): Text
     begin
-        exit(VectorImpl.ToString());
+        exit(VectorImplGm.ToString());
     end;
 
     /// <summary>
@@ -70,7 +70,7 @@ codeunit 70000 Vector
     /// <returns>The Euclidean norm as a Decimal value.</returns>
     procedure CalculateEuclideanNorm(): Decimal
     begin
-        exit(VectorImpl.CalculateEuclideanNorm());
+        exit(VectorImplGm.CalculateEuclideanNorm());
     end;
 
     /// <summary>
@@ -79,7 +79,7 @@ codeunit 70000 Vector
     /// <returns>The Taxicab norm as a Decimal value.</returns>
     procedure CalculateTaxicabNorm(): Decimal
     begin
-        exit(VectorImpl.CalculateTaxicabNorm());
+        exit(VectorImplGm.CalculateTaxicabNorm());
     end;
 
     /// <summary>
@@ -88,7 +88,7 @@ codeunit 70000 Vector
     /// <param name="Scalar">The scalar value to multiply the vector by.</param>
     procedure ScalarMultiplication(Scalar: Decimal)
     begin
-        VectorImpl.ScalarMultiplication(Scalar);
+        VectorImplGm.ScalarMultiplication(Scalar);
     end;
 
     /// <summary>
@@ -96,36 +96,36 @@ codeunit 70000 Vector
     /// </summary>
     /// <param name="OtherVector">The vector to compare with.</param>
     /// <returns>True if the vector is equal to the OtherVector; otherwise, false.</returns>
-    procedure AreEqual(OtherVector: Codeunit Vector): Boolean
+    procedure AreEqual(OtherVector: Codeunit "Vector GM"): Boolean
     begin
-        exit(VectorImpl.AreEqual(OtherVector));
+        exit(VectorImplGm.AreEqual(OtherVector));
     end;
 
     /// <summary>
     /// Adds the <paramref name="OtherVector"/> to the vector.
     /// </summary>
     /// <param name="OtherVector">The vector to add.</param>
-    procedure AddVector(OtherVector: Codeunit Vector)
+    procedure AddVector(OtherVector: Codeunit "Vector GM")
     begin
-        VectorImpl.AddVector(OtherVector);
+        VectorImplGm.AddVector(OtherVector);
     end;
 
     /// <summary>
     /// Subtracts the <paramref name="OtherVector"/> from the vector.
     /// </summary>
     /// <param name="OtherVector">The vector to subtract.</param>
-    procedure SubtractVector(OtherVector: Codeunit Vector)
+    procedure SubtractVector(OtherVector: Codeunit "Vector GM")
     begin
-        VectorImpl.SubtractVector(OtherVector);
+        VectorImplGm.SubtractVector(OtherVector);
     end;
 
     /// <summary>
     /// Calculates the dot product of the vector with the <paramref name="OtherVector"/>.
     /// </summary>
     /// <param name="OtherVector">The vector to calculate the dot product with.</param>
-    procedure DotProduct(OtherVector: Codeunit Vector)
+    procedure DotProduct(OtherVector: Codeunit "Vector GM")
     begin
-        VectorImpl.DotProduct(OtherVector);
+        VectorImplGm.DotProduct(OtherVector);
     end;
 
     /// <summary>
@@ -133,6 +133,6 @@ codeunit 70000 Vector
     /// </summary>
     procedure ErrIfVectorIsNotInitialized()
     begin
-        VectorImpl.ErrIfVectorIsNotInitialized();
+        VectorImplGm.ErrIfVectorIsNotInitialized();
     end;
 }

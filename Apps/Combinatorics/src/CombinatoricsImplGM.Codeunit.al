@@ -1,4 +1,4 @@
-codeunit 70003 "Combinatorics Impl."
+codeunit 70003 "Combinatorics Impl. GM"
 {
     Access = Internal;
 

@@ -5,8 +5,8 @@ It includes functionality for vector initialization, dimension retrieval, coordi
 ```
     procedure VectorDemo()
     var
-        Vector_X: Codeunit Vector;
-        Vector_Y: Codeunit Vector;
+        Vector_X: Codeunit "Vector GM";
+        Vector_Y: Codeunit "Vector GM";
         Coordinates_X: List of [Decimal];
     begin
         Coordinates_X.Add(1);
