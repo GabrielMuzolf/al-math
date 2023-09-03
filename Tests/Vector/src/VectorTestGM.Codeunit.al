@@ -1,4 +1,4 @@
-codeunit 80000 "Vector Test"
+codeunit 80000 "Vector Test GM"
 {
     Subtype = Test;
 
@@ -6,8 +6,7 @@ codeunit 80000 "Vector Test"
         Any: Codeunit Any;
         LibraryMathAssert: Codeunit "Library - Math Assert";
         LibraryAssert: Codeunit "Library Assert";
-        LibraryVectorTest: Codeunit "Library - Vector Test";
-
+        LibraryVectorTestGM: Codeunit "Library - Vector Test GM";
 
     [Test]
     procedure InitializeVectorByDimTest()
@@ -27,7 +26,7 @@ codeunit 80000 "Vector Test"
         LibraryAssert.AreEqual(Dim, VectorGM.GetDim(), 'The vector dimension is incorrect.');
 
         //[AND] The GetVector returns the list of size dimension with all zero elements.
-        LibraryMathAssert.AreEqual(LibraryVectorTest.GetListOfZeros(Dim), VectorGM.GetVector(), 'The vector coordinates are incorrect.');
+        LibraryMathAssert.AreEqual(LibraryVectorTestGM.GetListOfZeros(Dim), VectorGM.GetVector(), 'The vector coordinates are incorrect.');
     end;
 
     [Test]
@@ -63,7 +62,7 @@ codeunit 80000 "Vector Test"
         Dim := Any.IntegerInRange(1, 10);
 
         //[AND] A list of random vector coordinates.
-        Coordinates := LibraryVectorTest.GetRandomList(Dim);
+        Coordinates := LibraryVectorTestGM.GetRandomList(Dim);
 
         //[WHEN] The Initialize method is called with the list of coordinates.
         VectorGM.Initialize(Coordinates);
@@ -107,10 +106,10 @@ codeunit 80000 "Vector Test"
         Dim := Any.IntegerInRange(1, 10);
 
         //[AND] A list of random vector coordinates.
-        Coordinates := LibraryVectorTest.GetRandomList(Dim);
+        Coordinates := LibraryVectorTestGM.GetRandomList(Dim);
 
         //[WHEN] The Initialize method is called for the well formated coordinates in the square brackets [].
-        VectorGM.Initialize('[' + LibraryVectorTest.GetListAsCommaSeparatedCoordinates(Coordinates) + ']');
+        VectorGM.Initialize('[' + LibraryVectorTestGM.GetListAsCommaSeparatedCoordinates(Coordinates) + ']');
 
         //[THEN] The GetDim method should return the expected dimension.
         LibraryAssert.AreEqual(Dim, VectorGM.GetDim(), 'The vector dimension is incorrect.');
@@ -182,13 +181,13 @@ codeunit 80000 "Vector Test"
         //[SCENARIO] Tests the conversion of a vector to a string.
 
         //[GIVEN] A list of random vector coordinates.
-        Coordinates := LibraryVectorTest.GetRandomList(Any.IntegerInRange(1, 10));
+        Coordinates := LibraryVectorTestGM.GetRandomList(Any.IntegerInRange(1, 10));
 
         //[AND] An initialized vector.
         VectorGM.Initialize(Coordinates);
 
         //[AND] An expected Vector as a string representation.
-        ExpectedVector := '[' + LibraryVectorTest.GetListAsCommaSeparatedCoordinates(Coordinates) + ']';
+        ExpectedVector := '[' + LibraryVectorTestGM.GetListAsCommaSeparatedCoordinates(Coordinates) + ']';
 
         //[WHEN] The ToString method is called.
         //[THEN] The method returns the Vector as a string in the format of [x, y, z, ...].
@@ -247,7 +246,7 @@ codeunit 80000 "Vector Test"
         Dim := Any.IntegerInRange(1, 10);
 
         //[AND] A list of random vector coordinates.
-        Coordinates := LibraryVectorTest.GetRandomList(Dim);
+        Coordinates := LibraryVectorTestGM.GetRandomList(Dim);
 
         //[AND] An initialized vector.
         VectorGM.Initialize(Coordinates);
@@ -259,7 +258,7 @@ codeunit 80000 "Vector Test"
         VectorGM.ScalarMultiplication(Scalar);
 
         //[THEN] The GetVector method should return the coordinates multiplied by the scalar.
-        LibraryVectorTest.MultipleListByNumber(Coordinates, Scalar);
+        LibraryVectorTestGM.MultipleListByNumber(Coordinates, Scalar);
         LibraryMathAssert.AreEqual(Coordinates, VectorGM.GetVector(), 'The vector coordinates multiplied by scalar are incorrect.');
     end;
 
@@ -276,7 +275,7 @@ codeunit 80000 "Vector Test"
         Dim := Any.IntegerInRange(1, 10);
 
         //[AND] A list of random vector coordinates.
-        Coordinates := LibraryVectorTest.GetRandomList(Dim);
+        Coordinates := LibraryVectorTestGM.GetRandomList(Dim);
 
         //[AND] An initialized Vector_X by Coordinates.
         VectorGM_X.Initialize(Coordinates);
