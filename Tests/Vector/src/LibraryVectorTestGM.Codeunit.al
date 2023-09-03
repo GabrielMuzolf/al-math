@@ -1,4 +1,4 @@
-codeunit 80001 "Library - Vector Test"
+codeunit 80001 "Library - Vector Test GM"
 {
 
     /// <summary>
